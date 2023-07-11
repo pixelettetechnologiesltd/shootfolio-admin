@@ -1,48 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../Assets/Css/Leaguemap.css";
 import { Link } from "react-router-dom";
-// import toast from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   GetAllGameLeague,
-//   clearErrors,
-//   clearMessages,
-// } from "./../storeRedux/actions";
-// import { Puff } from "react-loader-spinner";
-
-const leagues = [
-  {
-    name: "Crypto Amateur Learners League",
-    categorytitle: "Category",
-    category: "Ameture",
-    fundstitle: "Funds",
-    funds: "$10,000",
-    membership: "Membership Type",
-    memtype: "Free",
-    btn: "Edit",
-  },
-  {
-    name: "Crypto Super League ",
-    categorytitle: "Category",
-    category: "Ameture",
-    fundstitle: "Funds",
-    funds: "$10,000",
-    membership: "Membership Type",
-    memtype: "Subscription",
-    btn: "Edit",
-  },
-  {
-    name: "Crypto Expert League ",
-    categorytitle: "Category",
-    category: "Ameture",
-    fundstitle: "Funds",
-    funds: "$10,000",
-    membership: "Membership Type",
-    memtype: "Free",
-    btn: "Edit",
-  },
-];
 
 const Leaguemap = ({ league }) => {
   return (
@@ -53,8 +11,7 @@ const Leaguemap = ({ league }) => {
           <div className="makecatfundmeminrow mt-4">
             <p className="categorytitle">Category</p>
             <p className="categoryitself">
-              {item.gameModeId?.gameType?.gameTitle &&
-                item.gameModeId.gameType.gameTitle}
+              {item.gameTypeId?.gameTitle && item.gameTypeId.gameTitle}
             </p>
           </div>
           <div className="makecatfundmeminrow mt-2">
