@@ -40,6 +40,44 @@ export const Signin = (body) => {
   };
 };
 
+export const GetAllUser = () => {
+  return async (dispatch) => {
+    dispatch({ type: authConstant.GET_ALL_USER_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: authConstant.GET_ALL_USER_SUCCESS,
+        payload: {
+          results: data.results,
+          page: data.page,
+          totalPages: data.totalPages,
+        },
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: authConstant.GET_ALL_USER_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
 export const logOut = () => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_LOGOUT_REQUEST });
