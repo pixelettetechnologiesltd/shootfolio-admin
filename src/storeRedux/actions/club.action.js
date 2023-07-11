@@ -60,7 +60,7 @@ export const GetAllCoin = (page) => {
       let result;
       if (page) {
         result = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/v1/api/coins?page=${page}&limit=400`,
+          `${process.env.REACT_APP_BASE_URL}/v1/api/coins?page=${page}&limit=50`,
           {
             headers: {
               Authorization: token ? `Bearer ${token}` : "",
