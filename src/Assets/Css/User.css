@@ -1,0 +1,84 @@
+.addpaddinguser{
+    padding:15px 30px;
+}
+.usercardone{
+background-color: #76AFD8;
+padding: 30px;
+border-radius: 10px;
+}
+.usercardtwo{
+    background-color: #718DDB;
+    padding: 30px;
+    border-radius: 10px; 
+}
+.usercardthree{
+    background-color: #79BCA8;
+    padding: 30px;
+    border-radius: 10px;
+}
+.cardheqadinguser{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #1A1F38;
+}
+.headsubheadinlineusercard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cardsubhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #1A1F38;
+    margin-bottom: 0px;
+}
+.cardsparagraph{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #1C6092;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+.userrowtitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #888B96;
+    margin-right: 10px;
+}
+.userrowstatusbtn, .userrowstatusbtn:hover, .userrowstatusbtn:focus{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #D9D9D9;
+    background-color: #FFFFFF1F;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 0px;
+}
+.makeuserrowbtninline{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.addspaceatbottom{
+    margin-bottom: 100px;
+}

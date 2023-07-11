@@ -1,0 +1,73 @@
+.addnewclubheading{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color:#FFFFFF;
+}
+.setmarg{
+    margin:40px;
+}
+.makelabelleft{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #BDBDBD;
+    margin-bottom: 15px;
+}
+.makeinputborder, .makeinputborder:focus{
+    border: 2px solid #BDBDBD;
+    background-color: transparent;
+    color: #adadad ;
+    padding: 10px;
+    border-radius: 10px !important;
+}
+.form-control {
+    color:#adadad;
+}
+.removebgupload, .removebgupload:focus{
+    background-color: transparent;
+    border: none;   
+}
+label.form-check-label{
+    color: #858585 !important;
+    margin-left: 20px;
+}
+.form-switch .form-check-input, .form-switch .form-check-input:focus{
+    background-color: #2a774177;
+    width: 2.5em;
+    height: 20px;
+    border: none;
+}
+.createclubbutton,.createclubbutton:hover{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #ffffff;
+    background-color: #2A7741;
+    border: none;
+    padding: 10px 20px;
+}
+.discardbutton,.discardbutton:hover{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #D9D9D9;
+    background-color: #2A774166;
+    border: none;
+    padding: 10px 20px;
+}
+.addgapbetween{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap:10px;
+    margin-top:30px;
+}

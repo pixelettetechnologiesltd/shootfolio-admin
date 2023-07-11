@@ -1,0 +1,38 @@
+.gametypebg{
+    background-color: black;
+    padding:50px  30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #1F79B0;
+}
+.gametypetitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 30px;
+}
+.editgametype{
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #22492E;
+    border: none;
+    padding: 12px 100px;
+    text-decoration: none;
+    width: 100%;
+    border-radius: 10px;
+}
+.makebuttonstretchgametype{
+   margin-top: 30px;
+}

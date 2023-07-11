@@ -1,0 +1,52 @@
+.forgetbtnloginform{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:#808080;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: transparent;
+   
+    text-decoration:none;
+}
+.makefieldgightmore{
+    line-height: 45px;
+}
+.submitbtn{
+    width: 63%;
+    display: flex;
+    justify-content: end;
+   
+}
+.forgetbtn{
+    width: 37%;
+    display: flex;
+    justify-content: end;
+}
+.makebtnsinrow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.makebtnsinrow_edit{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+}
+.makebtnsinrow_edit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 11px;
+    
+}
+
+.makesignupbtncenter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

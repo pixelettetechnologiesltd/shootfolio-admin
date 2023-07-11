@@ -1,0 +1,41 @@
+.addportfolioinclubheadmain{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color:#FFFFFF;
+}
+.formgroupbuttojn{
+    font-size: 25px;
+}
+button#buttonlink{
+    position: absolute;
+    right: 0px;
+    border: none;
+    background-color: transparent;
+}
+button#buttonnumberone {
+    position: absolute;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 22px;
+    line-height: 40px;
+}
+button#buttonnumbertwo{
+    position: absolute;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 33px;
+    line-height: 40px;
+}
+.makeinputborderandmakeinputcenter, .makeinputborderandmakeinputcenter:focus{
+    background-color: transparent;
+    border: 2px solid #BDBDBD;
+    border-radius: 10px !important;
+    line-height: 27px;
+    padding-left: 42%;
+    color: white;
+}

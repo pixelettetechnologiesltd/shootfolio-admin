@@ -1,0 +1,109 @@
+.notification-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #D9D9D9;
+    ;
+    padding-bottom: 10px;
+    width: 50%;
+    margin-left: 20px;
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #D9D9D9;
+    cursor: pointer;
+}
+.notification img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5px;
+}
+.notification.activeItem{
+    color: #2A7741;
+}
+.notification-text {
+    text-align: center;
+}
+
+.ml-20 {
+    margin-left: 10px;
+}
+
+.image-with-name {
+    display: flex;
+    align-items: center;
+}
+
+.image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #D9D9D9;
+}
+
+.d-flex {
+    display: flex;
+}
+.button-container {
+    position: relative;
+}
+
+.button {
+    padding: 10px 20px;
+    color: white;
+    background-color: #2A7741;
+    border-radius: 8px;
+    border: none;
+}
+.under_border {
+    width: calc(100% - 40px); /* Adjust the width as per your spacing preference */
+    margin: 0 20px; /* Adjust the margin as per your spacing preference */
+    border-bottom: 1px solid #fff; /* White-colored border */
+    margin-top: 30px;
+  }
+  .custom-textarea {
+    height: 200px; /* Adjust the height as per your requirements */
+  }
+  .popuponeditclick{
+    
+  }
+  .sluginrpw{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .slugtitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #D9D9D9;
+  }
+  .makeformsettingbuttonset{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .savesettingbuttonpop,  .savesettingbuttonpop:hover,  .savesettingbuttonpop:focus{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #101323;
+    background-color: #2A7741;
+    border: none;
+    padding: 15px 152px;
+    margin-top: 10px;
+  }

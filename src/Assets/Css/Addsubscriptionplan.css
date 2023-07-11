@@ -1,0 +1,63 @@
+.makecheckbackground{
+    background-color: #2F334A;
+    padding: 10px;
+    border-radius: 6px !important;
+    width: 100%;
+}
+input#plansecond-checkbox{
+    margin-left: 0px;
+}
+.positionrelsetplan{
+    position: relative;
+}
+button#planselectone{
+    position:absolute;
+    right: 10px;
+    top: 0px;
+    z-index: 0;
+    border: none;
+    font-size: 20px;
+    color: #CED0DE;
+}
+.planformsubmitbutton, .planformsubmitbutton:hover, .planformsubmitbutton:focus{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #2A7741;
+    border: none;
+    padding: 10px 30px;
+}
+.makeplanbuttonend{
+    display: flex;
+    justify-content: end;
+}
+.planppoptext{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color:#D9D9D9;
+    margin-top: 20px;
+}
+.planpopgolive, .planpopgolive:hover, .planpopgolive:focus{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #101323;
+    background-color: #2A7741;
+    border: none;
+    padding: 15px 100px;
+    margin-top: 20px;
+}
+.makeplanpopinline{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

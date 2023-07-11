@@ -1,0 +1,95 @@
+.logohead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 22px;
+    color:white;
+    margin-top: 10px;
+}
+.removelinefromlogo{
+    text-decoration: none;
+}
+.navbg{
+    background-color: #1B1B1B;
+    padding:1% 2.5%;
+}
+.navbar{
+    padding-left: 50px;
+}
+.form-control {
+    padding: 0.6rem 0.75rem;
+    background-color: transparent;
+    margin-top: 3px;
+}
+.form-control::placeholder {
+    color: #A1A1A1;
+}
+.btn-outline-success {
+    border: none;
+    margin-left: -50px;
+}
+.btn-outline-success:hover {
+    background-color: transparent;
+}
+.iconheaderform{
+    color: #7A7A7A;
+    font-size: 17px;
+}
+.navbar-toggler{
+    border: 1px solid #1b1b1b00;
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+.nav-link {
+    margin: 5px 10px;
+}
+.justify{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.makemaininrow{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0px 10px;
+    align-items: center;
+}
+.usernamemen{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #4C4C4C;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.userrolemen{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #B3B3B3;
+    text-align: left;
+    margin-bottom: 0px;
+}
+.namerole{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-left: 15px;
+}
+.notificationbg{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #504F4F;
+    padding-top: 9px;
+}
+.bellicon{
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}

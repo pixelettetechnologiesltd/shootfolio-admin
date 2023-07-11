@@ -1,0 +1,81 @@
+.makeinrowtitlesviewportfolio{
+    display: flex;
+    flex-direction: row;
+    padding: 0px 20px;
+}
+.joinleaguetitles{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    color:#D9D9D9;
+}
+.viewportsinglebg{
+    background-color: #2F334A;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;        
+}
+.nameandsr{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #D9D9D9;
+    margin-bottom: 0px;
+}
+.srviewport{
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #888B96;
+    margin-right: 4px;
+}
+.coinnameandlogoviewportinline{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.coinnameviewport{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #D9D9D9;
+    margin-bottom: 0px;
+    margin-left: 8px;
+}
+.viewporteditbutton, .viewporteditbutton:hover, .viewporteditbutton:focus{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 10px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+.makebuttonendviewport{
+    display: flex;
+    justify-content: end;
+}
+@media only screen and (max-width: 700px) {
+    .makedisplayyinblock{
+        width:980px;
+        padding: 20px;
+        display: inline-block;
+
+    }
+}

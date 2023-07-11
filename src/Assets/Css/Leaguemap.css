@@ -1,0 +1,54 @@
+.makeinrowleaague{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.leaguecardbg{
+    background-color: #FFFFFF17;
+    padding: 30px;
+    border-radius: 10px;
+    width: 28%;
+}
+.clubname{
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #D9D9D9;
+}
+.makecatfundmeminrow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.categorytitle{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: #888B96;
+}
+.categoryitself{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: #D9D9D9;    
+}
+.addleaguebutton, .addleaguebutton:hover{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    background-color: #2A7741;
+    border: none;
+    color: #D9D9D9;
+    text-decoration: none;
+    padding: 12px 45%;
+}
+.makeaddleaguebuttonstretch{
+    display: flex;
+    justify-content: center;
+}
