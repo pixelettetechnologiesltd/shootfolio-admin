@@ -108,9 +108,6 @@ const Assetmanagement = () => {
                     <Col md={2} xs={2}>
                       <p className="joinleaguetitles">Symbol</p>
                     </Col>
-                    <Col md={3} xs={2}>
-                      <p className="joinleaguetitles">Contract Address</p>
-                    </Col>
                     <Col md={2} xs={2}>
                       <p className="joinleaguetitles">Price_USD</p>
                     </Col>
@@ -154,9 +151,6 @@ const Assetmanagement = () => {
                             <p className="coinnameviewport">
                               {data.symbol && data.symbol}
                             </p>
-                          </Col>
-                          <Col md={3} xs={2}>
-                            <p className="coinnameviewport">0xa8...onG907</p>
                           </Col>
                           <Col md={2} xs={2}>
                             <p className="coinnameviewport">
