@@ -17,6 +17,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_CLUB_REQUEST:
     case clubConstant.ADD_CLUB_REQUEST:
     case clubConstant.GET_COIN_REQUEST:
+    case clubConstant.DELETE_COIN_REQUEST:
       return {
         ...state,
         loading: true,
@@ -44,6 +45,7 @@ const clubReducer = (state = initialState, action) => {
       };
     case clubConstant.ADD_CLUB_SUCCESS:
     case clubConstant.ADD_PORTFOLIO_SUCCESS:
+    case clubConstant.DELETE_COIN_SUCCESS:
       return {
         ...state,
         portLoading: false,
@@ -54,6 +56,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.ADD_CLUB_FAILURE:
     case clubConstant.GET_COIN_FAILURE:
     case clubConstant.ADD_PORTFOLIO_FAILURE:
+    case clubConstant.DELETE_COIN_FAILURE:
       return {
         ...state,
         portLoading: false,

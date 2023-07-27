@@ -31,7 +31,11 @@ const Editgameplaymode = () => {
     singleGameMode,
   } = useSelector((state) => state.gameModeReducer);
 
-  console.log("singleGameMode is", singleGameMode);
+  useEffect(() => {
+    dispatch(GetAllGameType());
+    dispatch(GetSingleGameMode(id));
+  }, []);
+
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     useFormik({
       initialValues: {
@@ -43,6 +47,7 @@ const Editgameplaymode = () => {
         duration: singleGameMode?.duration ? singleGameMode.duration : "",
         quiz: singleGameMode.quiz === false ? "false" : "true",
       },
+      enableReinitialize: true,
       validationSchema: editGameModeSchema,
       onSubmit: (values, action) => {
         dispatch(UpdateSingleGameMode(values, id));
@@ -50,7 +55,6 @@ const Editgameplaymode = () => {
       },
     });
 
-  console.log("values is", values);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -67,11 +71,6 @@ const Editgameplaymode = () => {
       setTimeout(() => navigate("/Dashboard/game/gameplaymode"), 2000);
     }
   }, [error, sessionExpireError, message]);
-
-  useEffect(() => {
-    dispatch(GetAllGameType());
-    dispatch(GetSingleGameMode(id));
-  }, []);
   return (
     <div>
       <Menu />

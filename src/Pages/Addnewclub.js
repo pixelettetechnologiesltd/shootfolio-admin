@@ -44,16 +44,24 @@ const Addnewclub = () => {
       status: "",
     },
     validationSchema: addClubSchema,
-    onSubmit: (values, action) => {
+    onSubmit: (values) => {
       const { photoPath, title, gameTypeId, symbol, status } = values;
       let finalResult = new FormData();
       finalResult.append("photoPath", photoPath);
       finalResult.append("title", title);
       finalResult.append("gameTypeId", gameTypeId);
       finalResult.append("symbol", symbol);
-      finalResult.append("status", status);
+      if (status === "false") {
+        finalResult.append("status", false);
+      }
+      if (!status) {
+        finalResult.append("status", false);
+      }
+      if (status === "true") {
+        finalResult.append("status", true);
+      }
       dispatch(AddClub(finalResult));
-      action.resetForm();
+      // action.resetForm();
     },
   });
 
@@ -209,9 +217,7 @@ const Addnewclub = () => {
                     )}
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="switch">
-                    <Form.Label className="makelabelleft">
-                      Status <span style={{ color: "red" }}>*</span>
-                    </Form.Label>
+                    <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"
                       id="custom-switch"
@@ -230,7 +236,7 @@ const Addnewclub = () => {
                     )}
                   </Form.Group>
                   <div className="addgapbetween">
-                    <Button className="discardbutton"> Discard</Button>
+                    {/* <Button className="discardbutton"> Discard</Button> */}
                     <Button className="createclubbutton" type="submit">
                       {loading ? (
                         <Puff

@@ -46,7 +46,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/Dashboard" element={<Home />}></Route>
             <Route path="/Dashboard/users" element={<Users />}></Route>
-            <Route path="/Dashboard/setting" element={<Setting />}></Route>
+            <Route path="/Dashboard/setting/:id?" element={<Setting />}></Route>
             <Route
               path="/Dashboard/game/shootfolioclubs"
               element={<Shootfolioclubs />}
@@ -68,7 +68,7 @@ function App() {
               element={<Defineleaguetype />}
             ></Route>
             <Route
-              path="/Dashboard/game/editleague"
+              path="/Dashboard/game/editleague/:id"
               element={<Editleague />}
             ></Route>
             <Route
@@ -96,7 +96,7 @@ function App() {
               element={<Addgametype />}
             ></Route>
             <Route
-              path="/Dashboard/game/editgametype"
+              path="/Dashboard/game/editgametype/:id?"
               element={<Editgametype />}
             ></Route>
             <Route
@@ -120,7 +120,7 @@ function App() {
               element={<Addsubscriptionplan />}
             ></Route>
             <Route
-              path="/Dashboard/editsubscriptionplan"
+              path="/Dashboard/editsubscriptionplan/:id?"
               element={<Editsubscriptionplan />}
             ></Route>
           </Route>

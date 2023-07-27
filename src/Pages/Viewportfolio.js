@@ -93,9 +93,9 @@ const Viewportfolio = () => {
               <Container className="makedisplayyinblockviewport">
                 <Row>
                   <Col md={12} className="makeinrowtitlesviewportfolio">
-                    <Col md={2} xs={2}>
+                    {/* <Col md={2} xs={2}>
                       <p className="joinleaguetitles">User Name</p>
-                    </Col>
+                    </Col> */}
                     <Col md={2} xs={2}>
                       <p className="joinleaguetitles">Coin</p>
                     </Col>
@@ -125,11 +125,11 @@ const Viewportfolio = () => {
                     return (
                       <Row className="mt-3" key={ind}>
                         <Col md={12} className="viewportsinglebg">
-                          <Col md={2} xs={2}>
+                          {/* <Col md={2} xs={2}>
                             <p className="nameandsr">
                               <span className="srviewport">1-</span> David
                             </p>
-                          </Col>
+                          </Col> */}
                           <Col md={2} xs={2}>
                             <div className="coinnameandlogoviewportinline">
                               <Image

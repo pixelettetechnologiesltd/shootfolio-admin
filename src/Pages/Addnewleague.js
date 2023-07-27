@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from "../Components/Menu";
 import Sidebar from "../Components/Sidebar";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -14,16 +14,38 @@ import {
   clearMessages,
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
+import Pagination from "@mui/material/Pagination";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  root: {
+    "& .MuiPaginationItem-root": {
+      color: "white",
+      backgroundColor: "black",
+      "&:hover": {
+        backgroundColor: "black",
+        color: "white",
+      },
+      "& .Mui-selected": {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+  },
+});
 
 const Addnewleague = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const [page, setPage] = useState(1);
   const {
     gameLeague,
     errors: error,
     message,
     sessionExpireError,
     loading,
+    totalPages,
   } = useSelector((state) => state.gameLeagueReducer);
 
   useEffect(() => {
@@ -43,8 +65,8 @@ const Addnewleague = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetAllGameLeague(1));
-  }, []);
+    dispatch(GetAllGameLeague(page));
+  }, [page]);
   return (
     <div>
       <Menu />
@@ -105,6 +127,26 @@ const Addnewleague = () => {
                   ""
                 )}
               </Col>
+              {loading
+                ? ""
+                : gameLeague.length > 0 && (
+                    <Pagination
+                      classes={{ root: classes.root }}
+                      variant="outlined"
+                      count={totalPages}
+                      page={page}
+                      size="large"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginTop: "2rem",
+                      }}
+                      showFirstButton
+                      showLastButton
+                      onChange={(e, value) => setPage(value)}
+                    />
+                  )}
             </Row>
           </Col>
         </Row>

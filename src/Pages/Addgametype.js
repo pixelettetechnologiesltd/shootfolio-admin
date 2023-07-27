@@ -40,14 +40,14 @@ const Addgametype = () => {
       status: "",
     },
     validationSchema: addGameTypeSchema,
-    onSubmit: (values, action) => {
+    onSubmit: (values) => {
       const { photoPath, gameTitle, status } = values;
       let finalResult = new FormData();
       finalResult.append("photoPath", photoPath);
       finalResult.append("gameTitle", gameTitle);
       finalResult.append("status", status);
       dispatch(AddGameType(finalResult));
-      action.resetForm();
+      // action.resetForm();
     },
   });
 
@@ -149,14 +149,14 @@ const Addgametype = () => {
                       ""
                     )}
                   </Form.Group>
-                  <Form.Group className="mb-4" controlId="formGroupText">
+                  {/* <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">Demo Link</Form.Label>
                     <Form.Control
                       className="makeinputborder"
                       type="text"
                       placeholder="www.youtube/demo.com"
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                   <Form.Group
                     controlId="formFile"
                     className="mb-4"
@@ -186,7 +186,7 @@ const Addgametype = () => {
                       ""
                     )}
                   </Form.Group>
-                  <Form.Group className="mb-4" controlId="switch">
+                  {/* <Form.Group className="mb-4" controlId="switch">
                     <Form.Label className="makelabelleft">
                       Quiz Access
                     </Form.Label>
@@ -195,7 +195,7 @@ const Addgametype = () => {
                       id="custom-switch"
                       label="Quiz access on or off"
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                   <div className="addgapbetween">
                     <Button className="createclubbutton" type="submit">
                       {loading ? (

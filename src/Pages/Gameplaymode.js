@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from "../Components/Menu";
 import Sidebar from "../Components/Sidebar";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -14,15 +14,38 @@ import {
   clearMessages,
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
+import Pagination from "@mui/material/Pagination";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  root: {
+    "& .MuiPaginationItem-root": {
+      color: "white",
+      backgroundColor: "black",
+      "&:hover": {
+        backgroundColor: "black",
+        color: "white",
+      },
+      "& .Mui-selected": {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+  },
+});
+
 const Gameplaymode = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const [page, setPage] = useState(1);
   const {
     gameMode,
     errors: error,
     message,
     sessionExpireError,
     loading,
+    totalPages,
   } = useSelector((state) => state.gameModeReducer);
 
   useEffect(() => {
@@ -42,8 +65,8 @@ const Gameplaymode = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetAllGameMode(1));
-  }, []);
+    dispatch(GetAllGameMode(page));
+  }, [page]);
   return (
     <div>
       <Menu />
@@ -132,72 +155,27 @@ const Gameplaymode = () => {
             ) : (
               ""
             )}
-            {/* <Row className="mt-3">
-              <Col md={2}></Col>
-              <Col md={8}>
-                <div className="gamemodebg">
-                  <Col md={6}>
-                    <p className="gamemodename">Idle (Player vs Machine)</p>
-                  </Col>
-                  <Col md={3}>
-                    <p className="gameduration">
-                      <span className="modedurationtitle"></span>7 Days
-                    </p>
-                  </Col>
-                  <Col md={3}>
-                    <Link to="/Dashboard/game/editgameplaymode">
-                      <Button className="gamdemodeeditbutton">Edit</Button>
-                    </Link>
-                  </Col>
-                </div>
-              </Col>
-              <Col md={2}></Col>
-            </Row> */}
-            {/* <Row className="mt-3">
-              <Col md={2}></Col>
-              <Col md={8}>
-                <div className="gamemodebg">
-                  <Col md={6}>
-                    <p className="gamemodename">Idle (Player vs Machine)</p>
-                  </Col>
-                  <Col md={3}>
-                    <p className="gameduration">
-                      <span className="modedurationtitle"></span>90 mins
-                    </p>
-                  </Col>
-                  <Col md={3}>
-                    <Link to="/Dashboard/game/editgameplaymode">
-                      <Button className="gamdemodeeditbutton">Edit</Button>
-                    </Link>
-                  </Col>
-                </div>
-              </Col>
-              <Col md={2}></Col>
-            </Row> */}
-            {/* <Row className="mt-3">
-              <Col md={2}></Col>
-              <Col md={8}>
-                <div className="gamemodebg">
-                  <Col md={6}>
-                    <p className="gamemodename">
-                      Multiplayer Realtime (5 Player vs 5 Player)
-                    </p>
-                  </Col>
-                  <Col md={3}>
-                    <p className="gameduration">
-                      <span className="modedurationtitle"></span>90 mins
-                    </p>
-                  </Col>
-                  <Col md={3}>
-                    <Link to="/Dashboard/game/editgameplaymode">
-                      <Button className="gamdemodeeditbutton">Edit</Button>
-                    </Link>
-                  </Col>
-                </div>
-              </Col>
-              <Col md={2}></Col>
-            </Row> */}
           </Col>
+          {loading
+            ? ""
+            : gameMode.length > 0 && (
+                <Pagination
+                  classes={{ root: classes.root }}
+                  variant="outlined"
+                  count={totalPages}
+                  page={page}
+                  size="large"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "-5rem",
+                  }}
+                  showFirstButton
+                  showLastButton
+                  onChange={(e, value) => setPage(value)}
+                />
+              )}
         </Row>
       </Container>
     </div>

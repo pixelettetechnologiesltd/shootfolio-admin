@@ -36,9 +36,9 @@ const Addgameplaymode = () => {
         quiz: "",
       },
       validationSchema: addGameModeSchema,
-      onSubmit: (values, action) => {
+      onSubmit: (values) => {
         dispatch(AddGameMode(values));
-        action.resetForm();
+        // action.resetForm();
       },
     });
 
@@ -181,21 +181,7 @@ const Addgameplaymode = () => {
                       className="mb-4"
                       classNamem="makelabelandinputinline"
                     ></Form.Group>
-                    <Form.Label className="makelabelleft">
-                      Status <span style={{ color: "red" }}>*</span>
-                    </Form.Label>
-                    {/* <Form.Select
-                      className="makeinputborder"
-                      aria-label="Default select example"
-                      name="status"
-                      value={values.status}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option>Active</option>
-                      <option value="1">Inactive</option>
-                      <option value="2">Coming soon</option>
-                    </Form.Select> */}
+                    <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"
                       id="custom-switch"
@@ -215,7 +201,7 @@ const Addgameplaymode = () => {
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="switch">
                     <Form.Label className="makelabelleft">
-                      Quiz Access <span style={{ color: "red" }}>*</span>
+                      Quiz Access
                     </Form.Label>
                     <Form.Check
                       type="switch"

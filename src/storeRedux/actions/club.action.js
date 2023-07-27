@@ -9,7 +9,7 @@ export const GetAllClub = (page) => {
       let result;
       if (page) {
         result = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs?page=${page}&limit=10`,
+          `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs?page=${page}&limit=12`,
           {
             headers: {
               Authorization: token ? `Bearer ${token}` : "",
@@ -98,7 +98,7 @@ export const GetAllCoin = (page) => {
       let result;
       if (page) {
         result = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/v1/api/coins?page=${page}&limit=50`,
+          `${process.env.REACT_APP_BASE_URL}/v1/api/coins?page=${page}&limit=10`,
           {
             headers: {
               Authorization: token ? `Bearer ${token}` : "",
@@ -134,6 +134,41 @@ export const GetAllCoin = (page) => {
       } else {
         dispatch({
           type: clubConstant.GET_COIN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const DeleteCoin = (coinId) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.DELETE_COIN_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/coins/${coinId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch(GetAllCoin(1));
+      dispatch({
+        type: clubConstant.DELETE_COIN_SUCCESS,
+        payload: "Coin has been deleted",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.DELETE_COIN_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }

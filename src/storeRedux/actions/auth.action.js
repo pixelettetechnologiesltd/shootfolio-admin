@@ -40,13 +40,13 @@ export const Signin = (body) => {
   };
 };
 
-export const GetAllUser = () => {
+export const GetAllUser = (page) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.GET_ALL_USER_REQUEST });
     try {
       const token = localStorage.getItem("adminToken");
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/`,
+        `${process.env.REACT_APP_BASE_URL}/v1/api/auth?page=${page}&limit=10`,
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
@@ -72,6 +72,76 @@ export const GetAllUser = () => {
       } else {
         dispatch({
           type: authConstant.GET_ALL_USER_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const GetSingleUser = (userId) => {
+  return async (dispatch) => {
+    dispatch({ type: authConstant.GET_SINGLE_USER_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/${userId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: authConstant.GET_SINGLE_USER_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: authConstant.GET_SINGLE_USER_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const UpdateUserStatus = (body, userId) => {
+  return async (dispatch) => {
+    dispatch({ type: authConstant.UPDATE_USER_STATUS_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/status/${userId}`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: authConstant.UPDATE_USER_STATUS_SUCCESS,
+        payload: "User status has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: authConstant.UPDATE_USER_STATUS_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }

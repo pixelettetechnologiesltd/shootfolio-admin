@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from "../Components/Menu";
 import Sidebar from "../Components/Sidebar";
 import { BiFootball } from "react-icons/bi";
@@ -14,15 +14,38 @@ import {
   clearMessages,
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
+import Pagination from "@mui/material/Pagination";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  root: {
+    "& .MuiPaginationItem-root": {
+      color: "white",
+      backgroundColor: "black",
+      "&:hover": {
+        backgroundColor: "black",
+        color: "white",
+      },
+      "& .Mui-selected": {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+  },
+});
+
 const Gametype = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const [page, setPage] = useState(1);
   const {
     gameType,
     errors: error,
     message,
     sessionExpireError,
     loading,
+    totalPages,
   } = useSelector((state) => state.gameTypeReducer);
 
   useEffect(() => {
@@ -42,8 +65,8 @@ const Gametype = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetAllGameType(1));
-  }, []);
+    dispatch(GetAllGameType(page));
+  }, [page]);
   return (
     <div>
       <Menu />
@@ -113,7 +136,7 @@ const Gametype = () => {
                         </p>
                         <div className="makebuttonstretchgametype">
                           <Link
-                            to="/Dashboard/game/editgametype"
+                            to={`/Dashboard/game/editgametype/${item.id}`}
                             className="editgametype"
                           >
                             Edit
@@ -126,48 +149,26 @@ const Gametype = () => {
               ) : (
                 ""
               )}
-              {/* <Col md={3}>
-                <div className="gametypebg">
-                  <Image src={images.gtypetwo} width="100px" />
-                  <p className="gametypetitle">Football</p>
-                  <div className="makebuttonstretchgametype">
-                    <Link
-                      to="/Dashboard/game/editgametype"
-                      className="editgametype"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              </Col> */}
-              {/* <Col md={3}>
-                <div className="gametypebg">
-                  <Image src={images.gtypethree} width="69px" />
-                  <p className="gametypetitle">Basketball</p>
-                  <div className="makebuttonstretchgametype">
-                    <Link
-                      to="/Dashboard/game/editgametype"
-                      className="editgametype"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              </Col> */}
-              {/* <Col md={3}>
-                <div className="gametypebg">
-                  <Image src={images.gtypefour} width="117px" />
-                  <p className="gametypetitle">Volleyball</p>
-                  <div className="makebuttonstretchgametype">
-                    <Link
-                      to="/Dashboard/game/editgametype"
-                      className="editgametype"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              </Col> */}
+              {loading
+                ? ""
+                : gameType.length > 0 && (
+                    <Pagination
+                      classes={{ root: classes.root }}
+                      variant="outlined"
+                      count={totalPages}
+                      page={page}
+                      size="large"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginTop: "2rem",
+                      }}
+                      showFirstButton
+                      showLastButton
+                      onChange={(e, value) => setPage(value)}
+                    />
+                  )}
             </Row>
           </Col>
         </Row>

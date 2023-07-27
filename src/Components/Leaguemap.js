@@ -27,7 +27,10 @@ const Leaguemap = ({ league }) => {
             </p>
           </div>
           <div className="makeaddleaguebuttonstretch mt-3">
-            <Link className="addleaguebutton" to="/Dashboard/game/editleague">
+            <Link
+              className="addleaguebutton"
+              to={`/Dashboard/game/editleague/${item.id}`}
+            >
               Edit
             </Link>
           </div>

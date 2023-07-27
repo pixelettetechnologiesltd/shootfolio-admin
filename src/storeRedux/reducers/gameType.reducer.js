@@ -2,6 +2,7 @@ import { authConstant, gameTypeConstant } from "../constants";
 
 const initialState = {
   gameType: [],
+  singleGameType: {},
   errors: [],
   loading: false,
   message: "",
@@ -14,6 +15,7 @@ const gameTypeReducer = (state = initialState, action) => {
   switch (action.type) {
     case gameTypeConstant.GET_GAME_TYPE_REQUEST:
     case gameTypeConstant.ADD_GAME_TYPE_REQUEST:
+    case gameTypeConstant.EDIT_SINGLE_GAME_TYPE_REQUEST:
       return {
         ...state,
         loading: true,
@@ -27,13 +29,22 @@ const gameTypeReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
       };
     case gameTypeConstant.ADD_GAME_TYPE_SUCCESS:
+    case gameTypeConstant.EDIT_SINGLE_GAME_TYPE_SUCCESS:
       return {
         ...state,
         loading: false,
         message: action.payload,
       };
+    case gameTypeConstant.GET_SINGLE_GAME_TYPE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        singleGameType: action.payload,
+      };
     case gameTypeConstant.GET_GAME_TYPE_FAILURE:
     case gameTypeConstant.ADD_GAME_TYPE_FAILURE:
+    case gameTypeConstant.GET_SINGLE_GAME_TYPE_FAILURE:
+    case gameTypeConstant.EDIT_SINGLE_GAME_TYPE_FAILURE:
       return {
         ...state,
         loading: false,

@@ -4,6 +4,7 @@ import gameTypeReducer from "./gameType.reducer";
 import gameLeagueReducer from "./gameLeague.reducer";
 import gameModeReducer from "./gameMode.reducer";
 import clubReducer from "./club.reducer";
+import subscriptionReducer from "./subscription.reducer";
 
 const rootReducer = combineReducers({
   authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   gameLeagueReducer,
   gameModeReducer,
   clubReducer,
+  subscriptionReducer,
 });
 
 export default rootReducer;

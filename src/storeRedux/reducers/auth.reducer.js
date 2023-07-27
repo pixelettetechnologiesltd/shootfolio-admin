@@ -4,9 +4,11 @@ const initialState = {
   errors: [],
   loading: false,
   user: [],
+  singleUser: {},
   page: 1,
   totalPages: 1,
   message: "",
+  customMessage: [],
   sessionExpireError: "",
 };
 
@@ -15,6 +17,8 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGIN_REQUEST:
     case authConstant.USER_LOGOUT_REQUEST:
     case authConstant.GET_ALL_USER_REQUEST:
+    case authConstant.UPDATE_USER_STATUS_REQUEST:
+    case authConstant.GET_SINGLE_USER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -25,6 +29,18 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         message: action.payload,
+      };
+    case authConstant.GET_SINGLE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        singleUser: action.payload,
+      };
+    case authConstant.UPDATE_USER_STATUS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        customMessage: action.payload,
       };
     case authConstant.GET_ALL_USER_SUCCESS:
       return {
@@ -37,6 +53,8 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGIN_FAILURE:
     case authConstant.USER_LOGOUT_FAILURE:
     case authConstant.GET_ALL_USER_FAILURE:
+    case authConstant.UPDATE_USER_STATUS_FAILURE:
+    case authConstant.GET_SINGLE_USER_FAILURE:
       return {
         ...state,
         loading: false,
@@ -53,6 +71,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         message: "",
+        customMessage: "",
       };
     case authConstant.CLEAR_ERRORS:
       return {

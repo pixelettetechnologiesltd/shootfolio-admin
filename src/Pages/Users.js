@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../Components/Sidebar";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { images } from "../Components/Images";
@@ -10,20 +10,45 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  UpdateUserStatus,
   GetAllUser,
   clearErrors,
   clearMessages,
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
+import Pagination from "@mui/material/Pagination";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  root: {
+    "& .MuiPaginationItem-root": {
+      color: "white",
+      backgroundColor: "black",
+      "&:hover": {
+        backgroundColor: "black",
+        color: "white",
+      },
+      "& .Mui-selected": {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+  },
+});
+
 const Users = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const [page, setPage] = useState(1);
   const {
     errors: error,
     message,
+    customMessage,
     sessionExpireError,
     loading,
     user,
+    totalPages,
   } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
@@ -40,10 +65,16 @@ const Users = () => {
       toast.success(message);
       dispatch(clearMessages());
     }
-  }, [error, sessionExpireError, message]);
+    if (customMessage.length > 0) {
+      toast.success(customMessage);
+      dispatch(clearMessages());
+    }
+  }, [error, sessionExpireError, message, customMessage]);
+
   useEffect(() => {
-    dispatch(GetAllUser());
-  }, []);
+    dispatch(GetAllUser(page));
+  }, [page]);
+
   return (
     <div>
       <Menu />
@@ -153,18 +184,48 @@ const Users = () => {
                         <Col md={2} xs={2}>
                           <p className="coinnameviewport">
                             <span className="userrowtitle">Joined Date</span>
-                            {data.createdAt && data.createdAt}
+                            {data.createdAt &&
+                              new Date(data.createdAt).toLocaleDateString()}
                           </p>
                         </Col>
                         <Col md={3} xs={2}>
                           <div className="makeuserrowbtninline">
-                            <Button className="userrowstatusbtn">
+                            <Button
+                              className="userrowstatusbtn"
+                              disabled={loading ? true : false}
+                              onClick={() =>
+                                dispatch(
+                                  UpdateUserStatus(
+                                    { status: "active" },
+                                    data.id
+                                  )
+                                )
+                              }
+                            >
                               Active{" "}
                             </Button>
-                            <Button className="userrowstatusbtn">
+                            <Button
+                              className="userrowstatusbtn"
+                              onClick={() =>
+                                dispatch(
+                                  UpdateUserStatus(
+                                    { status: "inactive" },
+                                    data.id
+                                  )
+                                )
+                              }
+                              disabled={loading ? true : false}
+                            >
                               Inactive{" "}
                             </Button>
-                            <Button className="userrowstatusbtn">Edit</Button>
+                            <Button
+                              className="userrowstatusbtn"
+                              onClick={() =>
+                                navigate(`/Dashboard/setting/${data.id}`)
+                              }
+                            >
+                              Edit
+                            </Button>
                           </div>
                         </Col>
                       </Col>
@@ -175,6 +236,26 @@ const Users = () => {
                 ""
               )}
             </div>
+            {loading
+              ? ""
+              : user.length > 0 && (
+                  <Pagination
+                    classes={{ root: classes.root }}
+                    variant="outlined"
+                    count={totalPages}
+                    page={page}
+                    size="large"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: "2rem",
+                    }}
+                    showFirstButton
+                    showLastButton
+                    onChange={(e, value) => setPage(value)}
+                  />
+                )}
           </Col>
         </Row>
       </Container>

@@ -17,6 +17,7 @@ import {
   clearMessages,
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
+
 const Defineleaguetype = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,9 +39,17 @@ const Defineleaguetype = () => {
         investableBudget: "",
       },
       validationSchema: addLeagueTypeSchema,
-      onSubmit: (values, action) => {
+      onSubmit: (values) => {
+        if (!values.status) {
+          values["status"] = false;
+        }
+        if (values.status === "false") {
+          values["status"] = false;
+        }
+        if (values.status === "true") {
+          values["status"] = true;
+        }
         dispatch(AddGameLeague(values));
-        action.resetForm();
       },
     });
 
@@ -242,9 +251,7 @@ const Defineleaguetype = () => {
                     </Form.Select>
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="switch">
-                    <Form.Label className="makelabelleft">
-                      Status <span style={{ color: "red" }}>*</span>
-                    </Form.Label>
+                    <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"
                       id="custom-switch"

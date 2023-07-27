@@ -256,7 +256,7 @@ const Sidebar = () => {
             <span className="iconsizing">
               <BiLogOut />
             </span>
-            <span className="dashboard-text">{loading ? "..." : "Logout"}</span>
+            <span className="dashboard-text">Logout</span>
           </NavLink>
         </Nav.Item>
       </Nav>

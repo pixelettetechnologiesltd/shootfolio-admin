@@ -4,6 +4,7 @@ import "../Assets/Css/Menu.css";
 import { images } from "../Components/Images";
 import { BiBell } from "react-icons/bi";
 const Menu = () => {
+  const admin = JSON.parse(localStorage.getItem("admin"));
   return (
     <div className="navbg">
       <Row className="justify">
@@ -21,7 +22,7 @@ const Menu = () => {
                 <Image src={images.ellipse} />
               </div>
               <div className="namerole">
-                <p className="usernamemen">Karim Benzema</p>
+                <p className="usernamemen">{admin?.name && admin.name}</p>
                 <p className="userrolemen">Admin</p>
               </div>
             </div>
