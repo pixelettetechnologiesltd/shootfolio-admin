@@ -161,7 +161,11 @@ const Addportfolioinclub = () => {
                       {club.length > 0 &&
                         club.map((item, ind) => {
                           return (
-                            <option value={item.id} key={ind}>
+                            <option
+                              value={item.id}
+                              key={ind}
+                              style={{ color: "#4f4f4f" }}
+                            >
                               {item.title && item.title}
                             </option>
                           );
