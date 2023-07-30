@@ -72,7 +72,7 @@ export const Clubsmap = ({ clubData }) => {
       {clubData.map((item, ind) => (
         <Link
           className="clubmapremoveunderline"
-          to="/Dashboard/game/editclub"
+          to={`/Dashboard/game/editclub/${item.id}`}
           key={ind}
         >
           <div className="clubcardbg">

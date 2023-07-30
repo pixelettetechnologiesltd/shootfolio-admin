@@ -56,7 +56,7 @@ function App() {
               element={<Addnewclub />}
             ></Route>
             <Route
-              path="/Dashboard/game/editclub"
+              path="/Dashboard/game/editclub/:id?"
               element={<Editclub />}
             ></Route>
             <Route
@@ -84,7 +84,7 @@ function App() {
               element={<Viewportfolio />}
             ></Route>
             <Route
-              path="/Dashboard/game/Editportfolioclub"
+              path="/Dashboard/game/Editportfolioclub/:id?"
               element={<Editportfolioclub />}
             ></Route>
             <Route

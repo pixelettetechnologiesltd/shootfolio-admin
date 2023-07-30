@@ -165,7 +165,9 @@ const Viewportfolio = () => {
                           </Col>
                           <Col md={2} xs={2}>
                             <div className="makebuttonendviewport">
-                              <Link to="/Dashboard/game/Editportfolioclub">
+                              <Link
+                                to={`/Dashboard/game/Editportfolioclub/${data.id}`}
+                              >
                                 <Button className="viewporteditbutton">
                                   Edit
                                 </Button>

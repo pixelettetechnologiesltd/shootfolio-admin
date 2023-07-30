@@ -64,12 +64,8 @@ const Addportfolioinclub = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    if (club.length <= 0) {
-      dispatch(GetAllClub());
-    }
-    if (coin.length <= 0) {
-      dispatch(GetAllCoin(1));
-    }
+    dispatch(GetAllClub());
+    dispatch(GetAllCoin());
   }, []);
   return (
     <div>
@@ -175,24 +171,6 @@ const Addportfolioinclub = () => {
                       ""
                     )}
                   </Form.Group>
-                  {/* <Form.Group className="mb-4" controlId="formGroupText">
-                    <Form.Label className="makelabelleft">
-                      Number of Units
-                    </Form.Label>
-                    <InputGroup className="mb-4">
-                      <Button variant="outline-secondary" id="buttonnumberone">
-                        +
-                      </Button>
-                      <Form.Control
-                        className=" makeinputborderandmakeinputcenter"
-                        type="number"
-                        placeholder="$35,000"
-                      />
-                      <Button variant="outline-secondary" id="buttonnumbertwo">
-                        -
-                      </Button>
-                    </InputGroup>
-                  </Form.Group> */}
 
                   <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">

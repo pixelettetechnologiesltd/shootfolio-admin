@@ -2,6 +2,7 @@ import { authConstant, clubConstant } from "../constants";
 
 const initialState = {
   club: [],
+  singleClub: {},
   coin: [],
   errors: [],
   loading: false,
@@ -18,6 +19,10 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.ADD_CLUB_REQUEST:
     case clubConstant.GET_COIN_REQUEST:
     case clubConstant.DELETE_COIN_REQUEST:
+    case clubConstant.GET_SINGLE_CLUB_REQUEST:
+    case clubConstant.UPDATE_SINGLE_CLUB_REQUEST:
+    case clubConstant.GET_SINGLE_PORTFOLIO_REQUEST:
+    case clubConstant.UPDATE_SINGLE_PORTFOLIO_REQUEST:
       return {
         ...state,
         loading: true,
@@ -35,6 +40,13 @@ const clubReducer = (state = initialState, action) => {
         page: action.payload.page,
         totalPages: action.payload.totalPages,
       };
+    case clubConstant.GET_SINGLE_CLUB_SUCCESS:
+    case clubConstant.GET_SINGLE_PORTFOLIO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        singleClub: action.payload,
+      };
     case clubConstant.GET_COIN_SUCCESS:
       return {
         ...state,
@@ -46,6 +58,8 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.ADD_CLUB_SUCCESS:
     case clubConstant.ADD_PORTFOLIO_SUCCESS:
     case clubConstant.DELETE_COIN_SUCCESS:
+    case clubConstant.UPDATE_SINGLE_CLUB_SUCCESS:
+    case clubConstant.UPDATE_SINGLE_PORTFOLIO_SUCCESS:
       return {
         ...state,
         portLoading: false,
@@ -57,6 +71,10 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_COIN_FAILURE:
     case clubConstant.ADD_PORTFOLIO_FAILURE:
     case clubConstant.DELETE_COIN_FAILURE:
+    case clubConstant.GET_SINGLE_CLUB_FAILURE:
+    case clubConstant.UPDATE_SINGLE_CLUB_FAILURE:
+    case clubConstant.GET_SINGLE_PORTFOLIO_FAILURE:
+    case clubConstant.UPDATE_SINGLE_PORTFOLIO_FAILURE:
       return {
         ...state,
         portLoading: false,

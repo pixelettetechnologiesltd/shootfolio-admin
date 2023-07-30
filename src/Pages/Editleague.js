@@ -44,7 +44,7 @@ const Defineleaguetype = () => {
           singleGameLeague.gameModeId.modeTitle,
         leagueTitle:
           singleGameLeague?.leagueTitle && singleGameLeague.leagueTitle,
-        status: singleGameLeague.status === false ? "false" : "true",
+        status: singleGameLeague?.status === false ? "false" : "true",
         investableBudget:
           singleGameLeague?.investableBudget &&
           singleGameLeague.investableBudget,

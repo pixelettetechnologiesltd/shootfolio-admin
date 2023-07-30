@@ -181,28 +181,17 @@ const Defineleaguetype = () => {
                     classNamem="makelabelandinputinline"
                   >
                     <Form.Label className="makelabelleft">
-                      Select League Title{" "}
-                      <span style={{ color: "red" }}>*</span>
+                      League Title <span style={{ color: "red" }}>*</span>
                     </Form.Label>
-                    <Form.Select
+                    <Form.Control
                       className="makeinputborder"
-                      aria-label="Default select example"
+                      type="text"
+                      placeholder="Enter title"
                       name="leagueTitle"
                       value={values.leagueTitle}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                    >
-                      <option>Open this select menu</option>
-                      <option value="ICrypto Amateur Learners League">
-                        ICrypto Amateur Learners League
-                      </option>
-                      <option value="Crypto Super League">
-                        Crypto Super League{" "}
-                      </option>
-                      <option value="Crypto Expert League">
-                        Crypto Expert League{" "}
-                      </option>
-                    </Form.Select>
+                    />
                     {errors.leagueTitle && touched.leagueTitle ? (
                       <p className="form-error custom-form-error">
                         {errors.leagueTitle}

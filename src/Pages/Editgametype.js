@@ -6,7 +6,7 @@ import { BiFootball } from "react-icons/bi";
 import Form from "react-bootstrap/Form";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetSingleGameType,
@@ -18,7 +18,7 @@ import { Puff } from "react-loader-spinner";
 import { useFormik } from "formik";
 import { editGameTypeSchema } from "./../Schemas";
 const Editgametype = () => {
-  const { state } = useLocation();
+  // const { state } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

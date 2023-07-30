@@ -74,3 +74,11 @@ export const UpdateUserSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   userName: Yup.string().required("Usre Name is required"),
 });
+
+export const editClubSchema = Yup.object({
+  photoPath: Yup.mixed().required("Logo is required"),
+  title: Yup.string().required("Title is required"),
+  gameTypeId: Yup.string().required("Game Type is required"),
+  symbol: Yup.string().required("Symbol is required"),
+  status: Yup.string().required("Status is required"),
+});

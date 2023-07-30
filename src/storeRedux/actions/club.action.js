@@ -107,7 +107,7 @@ export const GetAllCoin = (page) => {
         );
       } else {
         result = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/v1/api/coins`,
+          `${process.env.REACT_APP_BASE_URL}/v1/api/coins?limit=400`,
           {
             headers: {
               Authorization: token ? `Bearer ${token}` : "",
@@ -239,6 +239,146 @@ export const AddPortfolio = (body) => {
       } else {
         dispatch({
           type: clubConstant.ADD_PORTFOLIO_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const GetSingleClub = (clubId) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_SINGLE_CLUB_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      let result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs/${clubId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.GET_SINGLE_CLUB_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_SINGLE_CLUB_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const UpdateSingleClub = (body, clubId) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.UPDATE_SINGLE_CLUB_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs/${clubId}`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: clubConstant.UPDATE_SINGLE_CLUB_SUCCESS,
+        payload: "Club has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.UPDATE_SINGLE_CLUB_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const GetSinglePortfolio = (portfolioId) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_SINGLE_PORTFOLIO_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/portfolio/${portfolioId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.GET_SINGLE_PORTFOLIO_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_SINGLE_PORTFOLIO_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const UpdateSinglePortfolio = (body, portfolioId) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.UPDATE_SINGLE_PORTFOLIO_REQUEST });
+    try {
+      const token = localStorage.getItem("adminToken");
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/portfolio/${portfolioId}`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: clubConstant.UPDATE_SINGLE_PORTFOLIO_SUCCESS,
+        payload: "Portfolio has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.UPDATE_SINGLE_PORTFOLIO_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }
