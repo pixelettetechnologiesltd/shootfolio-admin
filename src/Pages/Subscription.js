@@ -109,26 +109,19 @@ const Subscription = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="cardbody mt-4">
-                          <p className="planbenifits">
-                            <span className="checkwithplanbenifits">
-                              <AiOutlineCheck />
-                            </span>
-                            50 Positions
-                          </p>
-                          <p className="planbenifits mt-4">
-                            <span className="checkwithplanbenifits">
-                              <AiOutlineCheck />
-                            </span>
-                            Max 5 selected coins
-                          </p>
-                          <p className="planbenifits mt-4">
-                            <span className="checkwithplanbenifits">
-                              <AiOutlineCheck />
-                            </span>
-                            Exchange arbitrage
-                          </p>
-                        </div>
+                        {data.leagues &&
+                          data.leagues.map((item, ind) => {
+                            return (
+                              <div className="cardbody mt-4" key={ind}>
+                                <p className="planbenifits">
+                                  <span className="checkwithplanbenifits">
+                                    <AiOutlineCheck />
+                                  </span>
+                                  {item.leagueTitle}
+                                </p>
+                              </div>
+                            );
+                          })}
                         <div className="cardfooter mt-5">
                           <Link
                             to={`/Dashboard/editsubscriptionplan/${data._id}`}
