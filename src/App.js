@@ -28,6 +28,8 @@ import Gameplaymode from "./Pages/Gameplaymode";
 import Editgameplaymode from "./Pages/Editgameplaymode";
 import Addsubscriptionplan from "./Pages/Addsubscriptionplan";
 import Editsubscriptionplan from "./Pages/Editsubscriptionplan ";
+import Addquestion from "./Pages/Addquestion";
+import Quiz from "./Pages/Quiz";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./Components";
 function App() {
@@ -43,6 +45,8 @@ function App() {
           }}
         />
         <Routes>
+          <Route path="/addquestion" element={<Addquestion/>}></Route>
+          <Route path="/quiz" element={<Quiz/>}></Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="/Dashboard" element={<Home />}></Route>
             <Route path="/Dashboard/users" element={<Users />}></Route>
