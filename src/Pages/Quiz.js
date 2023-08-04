@@ -35,7 +35,7 @@ const Quiz = () => {
                                     <span className="breadgreenfootball">
                                         <BiFootball />
                                     </span>
-                                    <p className="sootfoliobreadclub">Add Quiz Question</p>
+                                    <p className="sootfoliobreadclub">Quiz</p>
                                 </div>
                             </Col>
                             <Col md={5}></Col>
