@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Menu from "../Components/Menu";
 import Sidebar from "../Components/Sidebar";
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { BiFootball } from "react-icons/bi";
 import "../Assets/Css/Addsubscriptionplan.css";
-// import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-// import { FaRegEdit } from "react-icons/fa";
 import Settingpop from "../Components/Settingpop";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Multiselect from "multiselect-react-dropdown";
 import {
   GetAllGameLeague,
   AddSubscriptionPlan,
@@ -25,6 +24,7 @@ const Addsubscriptionplan = () => {
   const [buttonPopupOne, setButtonPopupOne] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [leagueArray, setLeagueArray] = useState([]);
 
   const { gameLeague, errors: gameLeagueError } = useSelector(
     (state) => state.gameLeagueReducer
@@ -45,9 +45,13 @@ const Addsubscriptionplan = () => {
       },
       validationSchema: addSubscriptionPlanSchema,
       onSubmit: (values, action) => {
-        values["leagues"] = [values.leagues];
-        dispatch(dispatch(AddSubscriptionPlan(values)));
-        action.resetForm();
+        if (leagueArray.length <= 0) {
+          toast.error("League is required");
+        } else {
+          values["leagues"] = leagueArray;
+          dispatch(dispatch(AddSubscriptionPlan(values)));
+          action.resetForm();
+        }
       },
     });
 
@@ -75,6 +79,10 @@ const Addsubscriptionplan = () => {
   useEffect(() => {
     dispatch(GetAllGameLeague());
   }, []);
+
+  const handleMultiSelect = (sl, si) => {
+    setLeagueArray((previousState) => [...previousState, si.id]);
+  };
   return (
     <div>
       <Menu />
@@ -142,7 +150,7 @@ const Addsubscriptionplan = () => {
                     <Form.Label className="makelabelleft">
                       Select League <span style={{ color: "red" }}>*</span>
                     </Form.Label>
-                    <Form.Select
+                    {/* <Form.Select
                       className="makeinputborder"
                       aria-label="Default select example"
                       name="leagues"
@@ -166,7 +174,12 @@ const Addsubscriptionplan = () => {
                       </p>
                     ) : (
                       ""
-                    )}
+                    )} */}
+                    <Multiselect
+                      options={gameLeague}
+                      displayValue="leagueTitle"
+                      onSelect={(sl, si) => handleMultiSelect(sl, si)}
+                    />
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">
@@ -189,63 +202,8 @@ const Addsubscriptionplan = () => {
                       ""
                     )}
                   </Form.Group>
-                  {/* <Form.Group className="mb-4 mt-5" controlId="formGroupText">
-                    <Form.Label className="makelabelleft">
-                      Pick Features
-                    </Form.Label>
-                    {["checkbox"].map((type) => (
-                      <div key={`default-${type}`} className="mb-3">
-                        <InputGroup className="positionrelsetplan">
-                          <Form.Check
-                            className="makecheckbackground"
-                            type={type}
-                            id={`plansecond-${type}`}
-                            label="Crypto Amateur Learners League"
-                          />
-                          <Button
-                            variant="outline-secondary"
-                            id="planselectone"
-                          >
-                            <FaRegEdit />
-                          </Button>
-                        </InputGroup>
-                        <InputGroup className="positionrelsetplan mt-3">
-                          <Form.Check
-                            className="makecheckbackground"
-                            type={type}
-                            id={`plansecond-${type}`}
-                            label="Crypto Super League"
-                          />
-                          <Button
-                            variant="outline-secondary"
-                            id="planselectone"
-                          >
-                            <FaRegEdit />
-                          </Button>
-                        </InputGroup>
-                        <InputGroup className="positionrelsetplan mt-3">
-                          <Form.Check
-                            className="makecheckbackground"
-                            type={type}
-                            id={`plansecond-${type}`}
-                            label="Crypto Expert League"
-                          />
-                          <Button
-                            variant="outline-secondary"
-                            id="planselectone"
-                          >
-                            <FaRegEdit />
-                          </Button>
-                        </InputGroup>
-                      </div>
-                    ))}
-                  </Form.Group> */}
                   <div className="makeplanbuttonend">
-                    <Button
-                      //   onClick={() => setButtonPopupOne(true)}
-                      className="planformsubmitbutton"
-                      type="submit"
-                    >
+                    <Button className="planformsubmitbutton" type="submit">
                       {loading ? (
                         <Puff
                           height="20"

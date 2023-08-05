@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllPortfolio,
+  GetSingleClub,
   clearErrors,
   clearMessages,
 } from "./../storeRedux/actions";
@@ -26,6 +27,7 @@ const Viewportfolio = () => {
     sessionExpireError,
     loading,
     club,
+    singleClub,
   } = useSelector((state) => state.clubReducer);
 
   useEffect(() => {
@@ -48,6 +50,7 @@ const Viewportfolio = () => {
   useEffect(() => {
     let admin = adminUser?.id;
     dispatch(GetAllPortfolio(admin, id, 1));
+    dispatch(GetSingleClub(id));
   }, []);
   return (
     <div>
@@ -75,8 +78,14 @@ const Viewportfolio = () => {
             <Row className="setpaddinginnerpage">
               <Col md={4}>
                 <div className="makebreadinrow">
-                  <Image src={images.clubone} width="60px" />
-                  <p className="sootfoliobreadclub">Pico Clubs</p>
+                  <Image
+                    crossOrigin="true"
+                    src={singleClub?.logo && singleClub.logo}
+                    width="60px"
+                  />
+                  <p className="sootfoliobreadclub">
+                    {singleClub?.title && singleClub.title}
+                  </p>
                 </div>
               </Col>
               <Col md={5}></Col>
@@ -93,9 +102,6 @@ const Viewportfolio = () => {
               <Container className="makedisplayyinblockviewport">
                 <Row>
                   <Col md={12} className="makeinrowtitlesviewportfolio">
-                    {/* <Col md={2} xs={2}>
-                      <p className="joinleaguetitles">User Name</p>
-                    </Col> */}
                     <Col md={2} xs={2}>
                       <p className="joinleaguetitles">Coin</p>
                     </Col>
@@ -125,11 +131,6 @@ const Viewportfolio = () => {
                     return (
                       <Row className="mt-3" key={ind}>
                         <Col md={12} className="viewportsinglebg">
-                          {/* <Col md={2} xs={2}>
-                            <p className="nameandsr">
-                              <span className="srviewport">1-</span> David
-                            </p>
-                          </Col> */}
                           <Col md={2} xs={2}>
                             <div className="coinnameandlogoviewportinline">
                               <Image

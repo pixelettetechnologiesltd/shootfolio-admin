@@ -66,7 +66,7 @@ export const EditLeagueTypeSchema = Yup.object({
 
 export const addSubscriptionPlanSchema = Yup.object({
   name: Yup.string().required("Plan name is required"),
-  leagues: Yup.string().required("League is required"),
+  leagues: Yup.string().optional(),
   amount: Yup.number().required("Price is required"),
 });
 
