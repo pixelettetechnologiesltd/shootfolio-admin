@@ -1,5 +1,5 @@
 .breadgreenfootball{
-    font-size: 30px;
+    font-size: 40px;
     color: #2A7741;
 }
 .setpaddinginnerpage{
@@ -15,6 +15,7 @@
     font-weight: 600;
     color: white;
     margin-bottom: 0px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 .makebreadinrow{
@@ -23,11 +24,15 @@
     align-items: center;
 }
 .addnewshhotfolioclubbutton, .addnewshhotfolioclubbutton:hover{
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     text-align: center;
     color: #FFFFFF;
     background-color: #2A7741;
     border: none;
-    padding: 12px 20px;
+    padding: 10px 20px;
 }
+
+
+
+
