@@ -16,11 +16,13 @@ const subscriptionPlanReducer = (state = initialState, action) => {
     case subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionPlanConstant.GET_ALL_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_REQUEST:
+    case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_SUCCESS:
+    case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -43,6 +45,7 @@ const subscriptionPlanReducer = (state = initialState, action) => {
     case subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionPlanConstant.GET_ALL_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_FAILURE:
+    case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_FAILURE:
       return {
         ...state,
         loading: false,

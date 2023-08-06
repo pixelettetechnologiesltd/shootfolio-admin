@@ -79,15 +79,15 @@ export const GetAllSubscriptionPlan = (page) => {
   };
 };
 
-export const EditSubscriptionPlan = (body, subscriptionId) => {
+export const UpdateSubscriptionPlan = (body, subscriptionId) => {
   return async (dispatch) => {
     dispatch({
-      type: subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_REQUEST,
+      type: subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/v1/api/subscription`,
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/subscription/${subscriptionId}`,
         body,
         {
           headers: {
@@ -96,8 +96,8 @@ export const EditSubscriptionPlan = (body, subscriptionId) => {
         }
       );
       dispatch({
-        type: subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_SUCCESS,
-        payload: "Subscription plan has been created",
+        type: subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_SUCCESS,
+        payload: "Subscription plan has been updated",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
@@ -108,7 +108,7 @@ export const EditSubscriptionPlan = (body, subscriptionId) => {
         });
       } else {
         dispatch({
-          type: subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_FAILURE,
+          type: subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }

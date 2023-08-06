@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllGameLeague,
   GetSingleSubscriptionPlan,
+  UpdateSubscriptionPlan,
   clearErrors,
   clearMessages,
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
 import { useFormik } from "formik";
 import { addSubscriptionPlanSchema } from "./../Schemas";
+import Multiselect from "multiselect-react-dropdown";
 
 const Editsubscriptionplan = () => {
   const [buttonPopupOne, setButtonPopupOne] = useState(false);
@@ -36,21 +38,34 @@ const Editsubscriptionplan = () => {
     loading,
   } = useSelector((state) => state.subscriptionReducer);
 
+  let leagueArray = [];
+
+  if (singleSubscriptionPlan?.leagues) {
+    singleSubscriptionPlan?.leagues?.forEach((item) => {
+      leagueArray.push(item.id);
+    });
+  }
+  const [updateLeague, setUpdateLeague] = useState([]);
+
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     useFormik({
       initialValues: {
         name: singleSubscriptionPlan?.name && singleSubscriptionPlan.name,
-        leagues:
-          singleSubscriptionPlan?.leagues && singleSubscriptionPlan.leagues[0],
+        leagues: "",
         amount: singleSubscriptionPlan?.amount && singleSubscriptionPlan.amount,
       },
       enableReinitialize: true,
       validationSchema: addSubscriptionPlanSchema,
       onSubmit: (values, action) => {
-        values["leagues"] = [values.leagues];
-        console.log("values is", values);
-        // dispatch(dispatch(AddSubscriptionPlan(values)));
-        // action.resetForm();
+        if (updateLeague.length > 0) {
+          values["leagues"] = updateLeague;
+          dispatch(dispatch(UpdateSubscriptionPlan(values, id)));
+          action.resetForm();
+        } else {
+          values["leagues"] = leagueArray;
+          dispatch(dispatch(UpdateSubscriptionPlan(values, id)));
+          action.resetForm();
+        }
       },
     });
 
@@ -79,6 +94,10 @@ const Editsubscriptionplan = () => {
     dispatch(GetAllGameLeague());
     dispatch(GetSingleSubscriptionPlan(id));
   }, []);
+
+  const handleMultiSelect = (sl, si) => {
+    setUpdateLeague((previousState) => [...previousState, si.id]);
+  };
   return (
     <div>
       <Menu />
@@ -144,30 +163,11 @@ const Editsubscriptionplan = () => {
                     <Form.Label className="makelabelleft">
                       Select League
                     </Form.Label>
-                    <Form.Select
-                      className="makeinputborder"
-                      aria-label="Default select example"
-                      name="leagues"
-                      value={values.leagues}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      {gameLeague.length > 0 &&
-                        gameLeague.map((item, ind) => {
-                          return (
-                            <option value={item.id && item.id} key={ind}>
-                              {item.leagueTitle && item.leagueTitle}
-                            </option>
-                          );
-                        })}
-                    </Form.Select>
-                    {errors.leagues && touched.leagues ? (
-                      <p className="form-error custom-form-error">
-                        {errors.leagues}
-                      </p>
-                    ) : (
-                      ""
-                    )}
+                    <Multiselect
+                      options={gameLeague}
+                      displayValue="leagueTitle"
+                      onSelect={(sl, si) => handleMultiSelect(sl, si)}
+                    />
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">Price</Form.Label>
@@ -189,7 +189,11 @@ const Editsubscriptionplan = () => {
                     )}
                   </Form.Group>
                   <div className="makeplanbuttonend">
-                    <Button className="planformsubmitbutton" type="submit">
+                    <Button
+                      className="planformsubmitbutton"
+                      type="submit"
+                      disabled={loading ? true : false}
+                    >
                       {loading ? (
                         <Puff
                           height="20"
