@@ -101,8 +101,9 @@ const Addquestion = () => {
                   <p className="sootfoliobreadclub">Add Quiz Question</p>
                 </div>
               </Col>
-              <Col md={5}></Col>
-              <Col md={3}></Col>
+              <Col md={2}></Col>
+              <Col md={6}>
+              </Col>
             </Row>
             <Row className="addpaddingtomakeformcent">
               <Col md={6}>
@@ -113,10 +114,11 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      Question: <span style={{ color: "red" }}>*</span>
+                      Question: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
                     </Form.Label>
                     <Col sm={10}>
                       <Form.Control
+                      style={{marginLeft:"5px"}}
                         type="text"
                         placeholder="Enter your question"
                         name="question"
@@ -139,9 +141,22 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      A: <span style={{ color: "red" }}>*</span>
+                      A: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
                     </Form.Label>
-                    <Col sm={10}>
+                    <Col sm={10} className="makebothinlinefields">
+                      <Form.Group>
+                        <label class="radio-button">
+                          <input value="0"  type="radio"  checked={selectedOption === "0"} onChange={handleOptionChange}/>
+                            <span class="radio"></span>
+                        </label>
+                        {/* <input
+                          type="radio"
+                          value="0"
+                          checked={selectedOption === "0"}
+                          onChange={handleOptionChange}
+                          style={{ marginTop: "1rem" }}
+                        /> */}
+                      </Form.Group>
                       <Form.Control
                         type="text"
                         placeholder="Enter option # 1"
@@ -150,13 +165,7 @@ const Addquestion = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <input
-                        type="radio"
-                        value="0"
-                        checked={selectedOption === "0"}
-                        onChange={handleOptionChange}
-                        style={{ marginTop: "1rem" }}
-                      />
+
                       {errors.option1 && touched.option1 ? (
                         <p className="form-error custom-form-error">
                           {errors.option1}
@@ -172,9 +181,22 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      B: <span style={{ color: "red" }}>*</span>
+                      B: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
                     </Form.Label>
-                    <Col sm={10}>
+                    <Col sm={10} className="makebothinlinefields">
+                    <Form.Group>
+                        <label class="radio-button">
+                          <input value="1"  type="radio"  checked={selectedOption === "1"} onChange={handleOptionChange}/>
+                            <span class="radio"></span>
+                        </label>
+                      {/* <input
+                        type="radio"
+                        value="1"
+                        checked={selectedOption === "1"}
+                        onChange={handleOptionChange}
+                        style={{ marginTop: "1rem" }}
+                      /> */}
+                      </Form.Group>
                       <Form.Control
                         type="text"
                         placeholder="Enter option # 2"
@@ -183,13 +205,7 @@ const Addquestion = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <input
-                        type="radio"
-                        value="1"
-                        checked={selectedOption === "1"}
-                        onChange={handleOptionChange}
-                        style={{ marginTop: "1rem" }}
-                      />
+                      
                       {errors.option2 && touched.option2 ? (
                         <p className="form-error custom-form-error">
                           {errors.option2}
@@ -205,9 +221,15 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      C: <span style={{ color: "red" }}>*</span>
+                      C: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
                     </Form.Label>
-                    <Col sm={10}>
+                    <Col sm={10} className="makebothinlinefields">
+                      <Form.Group>
+                      <label class="radio-button">
+                          <input value="2"  type="radio"  checked={selectedOption === "2"} onChange={handleOptionChange}/>
+                            <span class="radio"></span>
+                        </label>
+                      </Form.Group>
                       <Form.Control
                         type="text"
                         placeholder="Enter option # 3"
@@ -216,13 +238,13 @@ const Addquestion = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <input
+                      {/* <input
                         type="radio"
                         value="2"
                         checked={selectedOption === "2"}
                         onChange={handleOptionChange}
                         style={{ marginTop: "1rem" }}
-                      />
+                      /> */}
                       {errors.option3 && touched.option3 ? (
                         <p className="form-error custom-form-error">
                           {errors.option3}
@@ -238,9 +260,15 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      D: <span style={{ color: "red" }}>*</span>
+                      D: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
                     </Form.Label>
-                    <Col sm={10}>
+                    <Col sm={10} className="makebothinlinefields">
+                      <Form.Group>
+                      <label class="radio-button">
+                          <input value="3"  type="radio"  checked={selectedOption === "3"} onChange={handleOptionChange}/>
+                            <span class="radio"></span>
+                        </label>
+                      </Form.Group>
                       <Form.Control
                         type="text"
                         placeholder="Enter option # 4"
@@ -249,13 +277,13 @@ const Addquestion = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <input
+                      {/* <input
                         type="radio"
                         value="3"
                         checked={selectedOption === "3"}
                         onChange={handleOptionChange}
                         style={{ marginTop: "1rem" }}
-                      />
+                      /> */}
                       {errors.option4 && touched.option4 ? (
                         <p className="form-error custom-form-error">
                           {errors.option4}

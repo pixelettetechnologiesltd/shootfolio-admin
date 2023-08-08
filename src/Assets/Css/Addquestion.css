@@ -1,7 +1,16 @@
 .radio-input input {
     display: none;
   }
-  
+  .questionnote{
+    font-size: 16px;
+    color: red;
+    margin-top: 20px;
+  }
+  .makebothinlinefields{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   .radio-input {
     display: flex;
     flex-direction: column;
@@ -95,6 +104,57 @@
 
 
 
+  .radio-button {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px;
+    position: relative;
+    align-items: center;
+  }
+  
+  .radio-button input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .radio {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transform: translateZ(-25px);
+    transition: all 0.3s ease-in-out;
+    margin-top: 8px;
+  }
+  
+  .radio::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .radio-button input[type="radio"]:checked + .radio {
+    border-color: #2A7741;
+    transform: translateZ(0px);
+    background-color: #fff;
+  }
+  
+  .radio-button input[type="radio"]:checked + .radio::before {
+    opacity: 1;
+  }
+  
 
 
 
@@ -104,7 +164,7 @@
 
 
 
-  .formlabelquestion{ font-family: Roboto; font-size: 18px; font-weight: 400; line-height: 30px; letter-spacing: 0em; text-align: left; color: white; }
+  .formlabelquestion{ font-family: Roboto; font-size: 18px; font-weight: 400; line-height: 30px; letter-spacing: 0em; display: flex; align-items: center; justify-content: start; margin-bottom: 0px; color: white; }
    .addpaddingtomakeformcent{ padding: 0px 50px; } 
    .addmorepaddingforquestsubmit{ font-size: 14px; font-weight: 400; line-height: 16px; letter-spacing: 0em; text-align: center; color: #FFFFFF; background-color: #2A7741; border: none; padding: 18px 60px; } 
    .makeformsavebtnend{ display: flex; flex-direction: row; justify-content: end; align-items: center; margin-top: 30px; }
