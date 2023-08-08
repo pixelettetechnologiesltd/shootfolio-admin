@@ -82,3 +82,11 @@ export const editClubSchema = Yup.object({
   symbol: Yup.string().required("Symbol is required"),
   status: Yup.string().required("Status is required"),
 });
+
+export const addQuestionSchema = Yup.object({
+  question: Yup.string().required("Question is required"),
+  option1: Yup.string().required("Option1 is required"),
+  option2: Yup.string().required("Option2 is required"),
+  option3: Yup.string().required("Option3 is required"),
+  option4: Yup.string().required("Option4 is required"),
+});
