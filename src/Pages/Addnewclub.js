@@ -217,7 +217,12 @@ const Addnewclub = () => {
                     )}
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="switch">
-                    <Form.Label className="makelabelleft">Status</Form.Label>
+                    <Form.Label
+                      className="makelabelleft"
+                      style={{ display: "none" }}
+                    >
+                      Status
+                    </Form.Label>
                     <Form.Check
                       type="switch"
                       id="custom-switch"

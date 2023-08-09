@@ -145,6 +145,7 @@ const Defineleaguetype = () => {
                     controlId="formFile"
                     className="mb-4"
                     classNamem="makelabelandinputinline"
+                    style={{ display: "none" }}
                   >
                     <Form.Label className="makelabelleft">
                       Select Game Mode <span style={{ color: "red" }}>*</span>
@@ -221,25 +222,12 @@ const Defineleaguetype = () => {
                       ""
                     )}
                   </Form.Group>
+
                   <Form.Group
-                    controlId="formFile"
                     className="mb-4"
-                    classNamem="makelabelandinputinline"
+                    controlId="switch"
+                    style={{ display: "none" }}
                   >
-                    <Form.Label className="makelabelleft">
-                      Membership Type
-                    </Form.Label>
-                    <Form.Select
-                      className="makeinputborder"
-                      aria-label="Default select example"
-                    >
-                      <option>Subsciption</option>
-                      <option value="1">Subsciption</option>
-                      <option value="2">Subsciption</option>
-                      <option value="3">Crypto Expert League </option>
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group className="mb-4" controlId="switch">
                     <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"
