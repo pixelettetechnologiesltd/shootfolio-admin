@@ -20,12 +20,12 @@ const Leaguemap = ({ league }) => {
               {item.investableBudget && item.investableBudget}
             </p>
           </div>
-          <div className="makecatfundmeminrow mt-2">
+          {/* <div className="makecatfundmeminrow mt-2">
             <p className="categorytitle">Membership Type</p>
             <p className="categoryitself">
               {item.membership && item.membership}
             </p>
-          </div>
+          </div> */}
           <div className="makeaddleaguebuttonstretch mt-3">
             <Link
               className="addleaguebutton"

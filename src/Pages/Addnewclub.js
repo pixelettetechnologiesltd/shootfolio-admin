@@ -89,6 +89,7 @@ const Addnewclub = () => {
   const handleImageChange = (event) => {
     setFieldValue("photoPath", event.target.files[0]);
   };
+
   return (
     <div>
       <Menu />

@@ -45,7 +45,7 @@ const Editgameplaymode = () => {
         modeTitle: singleGameMode?.modeTitle ? singleGameMode.modeTitle : "",
         status: singleGameMode.status === false ? "false" : "true",
         duration: singleGameMode?.duration ? singleGameMode.duration : "",
-        quiz: singleGameMode.quiz === false ? "false" : "true",
+        // quiz: singleGameMode.quiz === false ? "false" : "true",
       },
       enableReinitialize: true,
       validationSchema: editGameModeSchema,
@@ -249,7 +249,11 @@ const Editgameplaymode = () => {
                       ""
                     )}
                   </Form.Group> */}
-                  <Form.Group controlId="formFile" className="mb-4 mt-4">
+                  <Form.Group
+                    controlId="formFile"
+                    className="mb-4 mt-4"
+                    style={{ display: "none" }}
+                  >
                     <Form.Label className="makelabelleft">
                       Quiz Access
                     </Form.Label>

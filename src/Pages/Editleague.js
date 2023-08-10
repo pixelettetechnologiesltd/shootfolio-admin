@@ -39,9 +39,9 @@ const Defineleaguetype = () => {
         gameTypeId:
           singleGameLeague?.gameTypeId?.gameTitle &&
           singleGameLeague.gameTypeId.gameTitle,
-        gameModeId:
-          singleGameLeague?.gameModeId?.modeTitle &&
-          singleGameLeague.gameModeId.modeTitle,
+        // gameModeId:
+        //   singleGameLeague?.gameModeId?.modeTitle &&
+        //   singleGameLeague.gameModeId.modeTitle,
         leagueTitle:
           singleGameLeague?.leagueTitle && singleGameLeague.leagueTitle,
         status: singleGameLeague?.status === false ? "false" : "true",
@@ -65,15 +65,15 @@ const Defineleaguetype = () => {
         } else {
           newGameTpeId = gameTypeId;
         }
-        let newGameModeId;
-        if (gameModeId === singleGameLeague.gameModeId.modeTitle) {
-          newGameModeId = singleGameLeague.gameModeId.id;
-        } else {
-          newGameModeId = gameModeId;
-        }
+        // let newGameModeId;
+        // if (gameModeId === singleGameLeague.gameModeId.modeTitle) {
+        //   newGameModeId = singleGameLeague.gameModeId.id;
+        // } else {
+        //   newGameModeId = gameModeId;
+        // }
         let finalResult = {
           gameTypeId: newGameTpeId,
-          gameModeId: newGameModeId,
+          gameModeId: "64ab3d6ddd27213e692f613c",
           leagueTitle,
           status,
           investableBudget,
@@ -173,6 +173,7 @@ const Defineleaguetype = () => {
                     controlId="formFile"
                     className="mb-4"
                     classNamem="makelabelandinputinline"
+                    style={{ display: "none" }}
                   >
                     <Form.Label
                       className="makelabelleft"

@@ -9,7 +9,7 @@ import { RiExternalLinkLine } from "react-icons/ri";
 import { useFormik } from "formik";
 import { addPortfolioSchema } from "./../Schemas";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllClub,
@@ -22,8 +22,8 @@ import { Puff } from "react-loader-spinner";
 const Addportfolioinclub = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const {
-    club,
     coin,
     message,
     errors: error,
@@ -36,12 +36,12 @@ const Addportfolioinclub = () => {
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     useFormik({
       initialValues: {
-        club: "",
         coin: "",
         quantity: "",
       },
       validationSchema: addPortfolioSchema,
       onSubmit: (values, action) => {
+        values["club"] = id;
         values["admin"] = adminUser?.id;
         dispatch(AddPortfolio(values));
         action.resetForm();
@@ -136,7 +136,7 @@ const Addportfolioinclub = () => {
                       ""
                     )}
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     controlId="formFile"
                     className="mb-4"
                     classNamem="makelabelandinputinline"
@@ -170,7 +170,7 @@ const Addportfolioinclub = () => {
                     ) : (
                       ""
                     )}
-                  </Form.Group>
+                  </Form.Group> */}
 
                   <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">

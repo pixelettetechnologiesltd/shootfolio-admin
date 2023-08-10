@@ -23,7 +23,7 @@ export const addGameTypeSchema = Yup.object({
 
 export const addLeagueTypeSchema = Yup.object({
   gameTypeId: Yup.string().required("Game Type is required"),
-  gameModeId: Yup.string().required("Game Mode is required"),
+  // gameModeId: Yup.string().required("Game Mode is required"),
   leagueTitle: Yup.string().required("League Title is required"),
   status: Yup.string().optional(),
   investableBudget: Yup.string().required("Investment Budget is required"),
@@ -41,12 +41,12 @@ export const editGameModeSchema = Yup.object({
   // gameType: Yup.string().required("Game Type is required"),
   modeTitle: Yup.string().required("Game Mode is required"),
   status: Yup.string().required("Status is required"),
-  quiz: Yup.string().required("Quiz is required"),
+  // quiz: Yup.string().required("Quiz is required"),
   duration: Yup.string().required("Duration is required"),
 });
 
 export const addPortfolioSchema = Yup.object({
-  club: Yup.string().required("Club is required"),
+  // club: Yup.string().required("Club is required"),
   coin: Yup.string().required("Coin is required"),
   quantity: Yup.number().required("quantity is required"),
 });
@@ -58,7 +58,7 @@ export const editGameTypeSchema = Yup.object({
 
 export const EditLeagueTypeSchema = Yup.object({
   gameTypeId: Yup.string().required("Game Type is required"),
-  gameModeId: Yup.string().required("Game Mode is required"),
+  // gameModeId: Yup.string().required("Game Mode is required"),
   leagueTitle: Yup.string().required("League Title is required"),
   status: Yup.string().optional(),
   investableBudget: Yup.string().required("Investment Budget is required"),

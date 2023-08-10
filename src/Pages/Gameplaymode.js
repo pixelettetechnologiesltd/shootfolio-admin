@@ -100,14 +100,14 @@ const Gameplaymode = () => {
                 </div>
               </Col>
               <Col md={5}></Col>
-              <Col md={3} className="makebuttonalignend">
+              {/* <Col md={3} className="makebuttonalignend">
                 <Link to="/Dashboard/game/addgameplaymode">
                   <Button className="addnewshhotfolioclubbutton">
                     {" "}
                     + Add New Game
                   </Button>
                 </Link>
-              </Col>
+              </Col> */}
             </Row>
             {loading ? (
               <Puff

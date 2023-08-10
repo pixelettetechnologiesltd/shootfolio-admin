@@ -90,7 +90,7 @@ const Viewportfolio = () => {
               </Col>
               <Col md={5}></Col>
               <Col md={3} className="makebuttonalignend">
-                <Link to="/Dashboard/game/addportfolioclub">
+                <Link to={`/Dashboard/game/addportfolioclub/${id}`}>
                   <Button className="addnewshhotfolioclubbutton">
                     {" "}
                     + Add New Portfolio
