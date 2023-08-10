@@ -224,11 +224,7 @@ const Defineleaguetype = () => {
                     )}
                   </Form.Group>
 
-                  <Form.Group
-                    className="mb-4"
-                    controlId="switch"
-                    style={{ display: "none" }}
-                  >
+                  <Form.Group className="mb-4" controlId="switch">
                     <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"
