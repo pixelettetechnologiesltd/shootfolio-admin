@@ -30,6 +30,7 @@ import Addsubscriptionplan from "./Pages/Addsubscriptionplan";
 import Editsubscriptionplan from "./Pages/Editsubscriptionplan ";
 import Addquestion from "./Pages/Addquestion";
 import Quiz from "./Pages/Quiz";
+import ManualTransactionHistory from "./Pages/ManualTransactionHistory";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./Components";
 function App() {
@@ -45,6 +46,8 @@ function App() {
           }}
         />
         <Routes>
+        <Route path="/manual-transaction-history" element={<ManualTransactionHistory/>}></Route>
+
           <Route path="/addquestion" element={<Addquestion />}></Route>
           <Route path="/quiz" element={<Quiz />}></Route>
           <Route element={<ProtectedRoutes />}>

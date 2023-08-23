@@ -3,7 +3,7 @@ import "../Assets/Css/Sidebar.css";
 import { Nav, Image } from "react-bootstrap";
 import { images } from "./Images";
 import { NavLink } from "react-router-dom";
-import { BsClipboard2Data } from "react-icons/bs";
+import { BsClipboard2Data , BsReverseListColumnsReverse } from "react-icons/bs";
 import { GiJugglingClubs } from "react-icons/gi";
 import { GiGamepadCross } from "react-icons/gi";
 import { BiJoystick, BiLogOut } from "react-icons/bi";
@@ -251,6 +251,26 @@ const Sidebar = () => {
               <MdOutlineVerifiedUser/>
             </span>
             <span className="dashboard-text">Quiz</span>
+          </NavLink>
+        </Nav.Item>
+
+        <Nav.Item>
+          <NavLink
+            to="/manual-transaction-history"
+            className="nav-link"
+            onClick={handleSidebarItemClick}
+            style={({ isActive }) => {
+              return {
+                fontWeight: isActive ? "bold" : "",
+                color: isActive ? "black" : "#808080",
+                backgroundColor: isActive ? "#2A7741" : "",
+              };
+            }}
+          >
+            <span className="iconsizing">
+              <BsReverseListColumnsReverse/>
+            </span>
+            <span className="dashboard-text">Manual Transactions</span>
           </NavLink>
         </Nav.Item>
 
