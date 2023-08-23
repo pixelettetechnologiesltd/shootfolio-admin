@@ -26,7 +26,6 @@ const Editportfolioinclub = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
-    club,
     singleClub,
     coin,
     message,
@@ -39,28 +38,22 @@ const Editportfolioinclub = () => {
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     useFormik({
       initialValues: {
-        club: singleClub?.club?.title && singleClub.club.title,
+        // club: singleClub?.club?.title && singleClub.club.title,
         coin: singleClub?.coin?.name && singleClub.coin.name,
         quantity: singleClub?.quantity && singleClub.quantity,
       },
       validationSchema: addPortfolioSchema,
       onSubmit: (values) => {
-        const { club, coin, quantity } = values;
-        let newClubId;
+        const { coin, quantity } = values;
+        // let newClubId = id;
         let newCoinId;
-        if (club === singleClub.club.title) {
-          newClubId = singleClub.club.id;
-        } else {
-          newClubId = club;
-        }
-
         if (coin === singleClub.coin.name) {
           newCoinId = singleClub.coin._id;
         } else {
           newCoinId = coin;
         }
         let finalResult = {
-          club: newClubId,
+          // club: newClubId,
           coin: newCoinId,
           quantity,
           admin: adminUser?.id,
@@ -68,6 +61,7 @@ const Editportfolioinclub = () => {
         dispatch(UpdateSinglePortfolio(finalResult, id));
       },
     });
+
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -86,7 +80,6 @@ const Editportfolioinclub = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetAllClub());
     dispatch(GetAllCoin());
     dispatch(GetSinglePortfolio(id));
   }, []);
@@ -157,7 +150,7 @@ const Editportfolioinclub = () => {
                       ""
                     )}
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     controlId="formFile"
                     className="mb-4"
                     classNamem="makelabelandinputinline"
@@ -188,7 +181,7 @@ const Editportfolioinclub = () => {
                     ) : (
                       ""
                     )}
-                  </Form.Group>
+                  </Form.Group> */}
 
                   <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">

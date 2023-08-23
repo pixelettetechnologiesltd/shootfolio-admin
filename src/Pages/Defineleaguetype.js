@@ -33,7 +33,6 @@ const Defineleaguetype = () => {
     useFormik({
       initialValues: {
         gameTypeId: "",
-        gameModeId: "",
         leagueTitle: "",
         status: "",
         investableBudget: "",
@@ -49,6 +48,7 @@ const Defineleaguetype = () => {
         if (values.status === "true") {
           values["status"] = true;
         }
+        values["gameModeId"] = "64ab3d6ddd27213e692f613c";
         dispatch(AddGameLeague(values));
       },
     });
@@ -74,6 +74,7 @@ const Defineleaguetype = () => {
     dispatch(GetAllGameType());
     dispatch(GetAllGameMode());
   }, []);
+
   return (
     <div>
       <Menu />
@@ -182,7 +183,7 @@ const Defineleaguetype = () => {
                     classNamem="makelabelandinputinline"
                   >
                     <Form.Label className="makelabelleft">
-                      League Title <span style={{ color: "red" }}>*</span>
+                      Name of the league <span style={{ color: "red" }}>*</span>
                     </Form.Label>
                     <Form.Control
                       className="makeinputborder"
@@ -203,7 +204,7 @@ const Defineleaguetype = () => {
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">
-                      Investment Budget <span style={{ color: "red" }}>*</span>
+                      Allocated Budget <span style={{ color: "red" }}>*</span>
                     </Form.Label>
                     <Form.Control
                       className="makeinputborder"
@@ -223,11 +224,7 @@ const Defineleaguetype = () => {
                     )}
                   </Form.Group>
 
-                  <Form.Group
-                    className="mb-4"
-                    controlId="switch"
-                    style={{ display: "none" }}
-                  >
+                  <Form.Group className="mb-4" controlId="switch">
                     <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"

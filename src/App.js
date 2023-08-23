@@ -45,8 +45,8 @@ function App() {
           }}
         />
         <Routes>
-          <Route path="/addquestion" element={<Addquestion/>}></Route>
-          <Route path="/quiz" element={<Quiz/>}></Route>
+          <Route path="/addquestion" element={<Addquestion />}></Route>
+          <Route path="/quiz" element={<Quiz />}></Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="/Dashboard" element={<Home />}></Route>
             <Route path="/Dashboard/users" element={<Users />}></Route>
@@ -64,7 +64,7 @@ function App() {
               element={<Editclub />}
             ></Route>
             <Route
-              path="/Dashboard/game/addportfolioclub"
+              path="/Dashboard/game/addportfolioclub/:id?"
               element={<Addportfolioclub />}
             ></Route>
             <Route
