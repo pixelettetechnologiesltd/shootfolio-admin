@@ -78,7 +78,7 @@ const Quiz = () => {
             md={9}
             lg={10}
             xl={10}
-            style={{ marginTop: "30px" }}
+            style={{ marginTop: "30px", marginBottom:"30px" }}
           >
             <Row className="setpaddinginnerpage">
               <Col md={4}>
@@ -166,9 +166,7 @@ const Quiz = () => {
                 <h1>No record found</h1>
               )}
             </Row>
-          </Col>
-        </Row>
-        {loading
+            {loading
           ? ""
           : quiz.length > 0 && (
               <Pagination
@@ -188,6 +186,8 @@ const Quiz = () => {
                 onChange={(e, value) => setPage(value)}
               />
             )}
+          </Col>
+        </Row>
       </Container>
     </div>
   );
