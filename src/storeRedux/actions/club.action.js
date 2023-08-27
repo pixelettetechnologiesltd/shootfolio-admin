@@ -5,7 +5,7 @@ export const GetAllClub = (page) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_CLUB_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result;
       if (page) {
         result = await axios.get(
@@ -37,7 +37,7 @@ export const GetAllClub = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -56,7 +56,7 @@ export const GetAllPortfolio = (admin, club, page) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_CLUB_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/portfolio?page=${page}&limit=10&admin=${admin}&club=${club}`,
         {
@@ -76,7 +76,7 @@ export const GetAllPortfolio = (admin, club, page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -94,7 +94,7 @@ export const GetAllCoin = (page) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_COIN_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result;
       if (page) {
         result = await axios.get(
@@ -126,7 +126,7 @@ export const GetAllCoin = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -145,7 +145,7 @@ export const DeleteCoin = (coinId) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.DELETE_COIN_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/v1/api/coins/${coinId}`,
         {
@@ -161,7 +161,7 @@ export const DeleteCoin = (coinId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -180,7 +180,7 @@ export const AddClub = (body) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.ADD_CLUB_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs`,
         body,
@@ -196,7 +196,7 @@ export const AddClub = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -215,7 +215,7 @@ export const AddPortfolio = (body) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.ADD_PORTFOLIO_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/portfolio`,
         body,
@@ -231,7 +231,7 @@ export const AddPortfolio = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -250,7 +250,7 @@ export const GetSingleClub = (clubId) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_SINGLE_CLUB_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs/${clubId}`,
         {
@@ -266,7 +266,7 @@ export const GetSingleClub = (clubId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -285,7 +285,7 @@ export const UpdateSingleClub = (body, clubId) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.UPDATE_SINGLE_CLUB_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameclubs/${clubId}`,
         body,
@@ -301,7 +301,7 @@ export const UpdateSingleClub = (body, clubId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -320,7 +320,7 @@ export const GetSinglePortfolio = (portfolioId) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_SINGLE_PORTFOLIO_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/portfolio/${portfolioId}`,
         {
@@ -336,7 +336,7 @@ export const GetSinglePortfolio = (portfolioId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -355,7 +355,7 @@ export const UpdateSinglePortfolio = (body, portfolioId) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.UPDATE_SINGLE_PORTFOLIO_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/portfolio/${portfolioId}`,
         body,
@@ -371,7 +371,7 @@ export const UpdateSinglePortfolio = (body, portfolioId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

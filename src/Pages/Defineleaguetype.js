@@ -35,7 +35,8 @@ const Defineleaguetype = () => {
         gameTypeId: "",
         leagueTitle: "",
         status: "",
-        investableBudget: "",
+        investableBudget: 0,
+        borrowAmount: 0,
       },
       validationSchema: addLeagueTypeSchema,
       onSubmit: (values) => {
@@ -208,7 +209,7 @@ const Defineleaguetype = () => {
                     </Form.Label>
                     <Form.Control
                       className="makeinputborder"
-                      type="text"
+                      type="number"
                       placeholder="$340"
                       name="investableBudget"
                       value={values.investableBudget}
@@ -223,7 +224,27 @@ const Defineleaguetype = () => {
                       ""
                     )}
                   </Form.Group>
-
+                  <Form.Group className="mb-4" controlId="formGroupText">
+                    <Form.Label className="makelabelleft">
+                      Borrow Amount <span style={{ color: "red" }}>*</span>
+                    </Form.Label>
+                    <Form.Control
+                      className="makeinputborder"
+                      type="number"
+                      placeholder="Add borrow limit"
+                      name="borrowAmount"
+                      value={values.borrowAmount}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {errors.borrowAmount && touched.borrowAmount ? (
+                      <p className="form-error custom-form-error">
+                        {errors.borrowAmount}
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                  </Form.Group>
                   <Form.Group className="mb-4" controlId="switch">
                     <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check

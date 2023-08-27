@@ -34,7 +34,7 @@ const Editportfolioinclub = () => {
     loading,
   } = useSelector((state) => state.clubReducer);
 
-  const adminUser = JSON.parse(localStorage.getItem("admin"));
+  const adminUser = JSON.parse(sessionStorage.getItem("admin"));
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     useFormik({
       initialValues: {

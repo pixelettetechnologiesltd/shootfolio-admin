@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function ProtectedRoute() {
-  const isLoggedIn = localStorage.getItem("adminToken");
+  const isLoggedIn = sessionStorage.getItem("adminToken");
   return isLoggedIn ? <Outlet /> : <Navigate to="/" replace />;
 }
 

@@ -2,6 +2,7 @@ import { authConstant, subscriptionPlanConstant } from "../constants";
 
 const initialState = {
   subscriptionPlans: [],
+  cryptoTransactions: [],
   singleSubscriptionPlan: {},
   errors: [],
   loading: false,
@@ -17,6 +18,7 @@ const subscriptionPlanReducer = (state = initialState, action) => {
     case subscriptionPlanConstant.GET_ALL_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_REQUEST:
+    case subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_REQUEST:
       return {
         ...state,
         loading: true,
@@ -36,6 +38,14 @@ const subscriptionPlanReducer = (state = initialState, action) => {
         page: action.payload.page,
         totalPages: action.payload.totalPages,
       };
+    case subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        cryptoTransactions: action.payload.results,
+        page: action.payload.page,
+        totalPages: action.payload.totalPages,
+      };
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_SUCCESS:
       return {
         ...state,
@@ -46,6 +56,7 @@ const subscriptionPlanReducer = (state = initialState, action) => {
     case subscriptionPlanConstant.GET_ALL_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_FAILURE:
+    case subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_FAILURE:
       return {
         ...state,
         loading: false,

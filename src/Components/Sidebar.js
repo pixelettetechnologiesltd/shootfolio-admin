@@ -3,7 +3,7 @@ import "../Assets/Css/Sidebar.css";
 import { Nav, Image } from "react-bootstrap";
 import { images } from "./Images";
 import { NavLink } from "react-router-dom";
-import { BsClipboard2Data , BsReverseListColumnsReverse } from "react-icons/bs";
+import { BsClipboard2Data, BsReverseListColumnsReverse } from "react-icons/bs";
 import { GiJugglingClubs } from "react-icons/gi";
 import { GiGamepadCross } from "react-icons/gi";
 import { BiJoystick, BiLogOut } from "react-icons/bi";
@@ -24,7 +24,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
   const [isSubMenuVisible, setIsSubMenuVisible] = useState(() => {
-    const storedSubMenuVisible = localStorage.getItem("isSubMenuVisible");
+    const storedSubMenuVisible = sessionStorage.getItem("isSubMenuVisible");
     return storedSubMenuVisible ? JSON.parse(storedSubMenuVisible) : false;
   });
   const {
@@ -38,13 +38,13 @@ const Sidebar = () => {
     e.preventDefault();
     const updatedSubMenuVisible = !isSubMenuVisible;
     setIsSubMenuVisible(updatedSubMenuVisible);
-    localStorage.setItem(
+    sessionStorage.setItem(
       "isSubMenuVisible",
       JSON.stringify(updatedSubMenuVisible)
     );
   };
   const handleSidebarItemClick = () => {
-    localStorage.setItem("isSubMenuVisible", JSON.stringify(false));
+    sessionStorage.setItem("isSubMenuVisible", JSON.stringify(false));
   };
   const handleLogout = async () => {
     try {
@@ -248,7 +248,7 @@ const Sidebar = () => {
             }}
           >
             <span className="iconsizing">
-              <MdOutlineVerifiedUser/>
+              <MdOutlineVerifiedUser />
             </span>
             <span className="dashboard-text">Quiz</span>
           </NavLink>
@@ -268,7 +268,7 @@ const Sidebar = () => {
             }}
           >
             <span className="iconsizing">
-              <BsReverseListColumnsReverse/>
+              <BsReverseListColumnsReverse />
             </span>
             <span className="dashboard-text">Manual Transactions</span>
           </NavLink>

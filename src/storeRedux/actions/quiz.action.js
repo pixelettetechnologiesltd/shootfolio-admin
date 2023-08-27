@@ -5,7 +5,7 @@ export const GetAllQuiz = (page) => {
   return async (dispatch) => {
     dispatch({ type: quizConstant.GET_QUIZ_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/quiz?page=${page}&limit=6`,
         {
@@ -25,7 +25,7 @@ export const GetAllQuiz = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -44,7 +44,7 @@ export const AddQuiz = (body) => {
   return async (dispatch) => {
     dispatch({ type: quizConstant.CREATE_QUIZ_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/api/quiz/`, body, {
         headers: {
           Authorization: token ? `Bearer ${token}` : "",
@@ -56,7 +56,7 @@ export const AddQuiz = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

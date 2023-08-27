@@ -5,7 +5,7 @@ export const GetAllGameType = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameTypeConstant.GET_GAME_TYPE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result;
       if (page) {
         result = await axios.get(
@@ -37,7 +37,7 @@ export const GetAllGameType = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -56,7 +56,7 @@ export const GetSingleGameType = (gameTypeId) => {
   return async (dispatch) => {
     dispatch({ type: gameTypeConstant.GET_SINGLE_GAME_TYPE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gametypes/${gameTypeId}`,
         {
@@ -72,7 +72,7 @@ export const GetSingleGameType = (gameTypeId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -90,7 +90,7 @@ export const AddGameType = (body) => {
   return async (dispatch) => {
     dispatch({ type: gameTypeConstant.ADD_GAME_TYPE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gametypes`,
         body,
@@ -106,7 +106,7 @@ export const AddGameType = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -125,7 +125,7 @@ export const EditSingleGameType = (body, gameTypeId) => {
   return async (dispatch) => {
     dispatch({ type: gameTypeConstant.EDIT_SINGLE_GAME_TYPE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gametypes/${gameTypeId}`,
         body,
@@ -141,7 +141,7 @@ export const EditSingleGameType = (body, gameTypeId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

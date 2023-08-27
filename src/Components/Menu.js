@@ -4,7 +4,7 @@ import "../Assets/Css/Menu.css";
 import { images } from "../Components/Images";
 import { BiBell } from "react-icons/bi";
 const Menu = () => {
-  const admin = JSON.parse(localStorage.getItem("admin"));
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
   return (
     <div className="navbg">
       <Row className="justify">

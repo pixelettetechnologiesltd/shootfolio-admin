@@ -7,7 +7,7 @@ export const AddSubscriptionPlan = (body) => {
       type: subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription`,
         body,
@@ -23,7 +23,7 @@ export const AddSubscriptionPlan = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -44,7 +44,7 @@ export const GetAllSubscriptionPlan = (page) => {
       type: subscriptionPlanConstant.GET_ALL_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription?page=${page}&limit=10`,
         {
@@ -64,7 +64,7 @@ export const GetAllSubscriptionPlan = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -85,7 +85,7 @@ export const UpdateSubscriptionPlan = (body, subscriptionId) => {
       type: subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription/${subscriptionId}`,
         body,
@@ -101,7 +101,7 @@ export const UpdateSubscriptionPlan = (body, subscriptionId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -122,7 +122,7 @@ export const GetSingleSubscriptionPlan = (subscriptionId) => {
       type: subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription/${subscriptionId}`,
         {
@@ -138,7 +138,7 @@ export const GetSingleSubscriptionPlan = (subscriptionId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -146,6 +146,47 @@ export const GetSingleSubscriptionPlan = (subscriptionId) => {
       } else {
         dispatch({
           type: subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const GetAllTransactionHistory = (page) => {
+  return async (dispatch) => {
+    dispatch({
+      type: subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_REQUEST,
+    });
+    try {
+      const token = sessionStorage.getItem("adminToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/cryptopayment?page=${page}&limit=10`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_SUCCESS,
+        payload: {
+          results: data.results,
+          page: data.page,
+          totalPages: data.totalPages,
+        },
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }

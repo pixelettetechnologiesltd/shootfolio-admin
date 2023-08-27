@@ -1,123 +1,176 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import Menu from "../Components/Menu";
 import Sidebar from "../Components/Sidebar";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
-import "../Assets/Css/ManualTransectionHistory.css"
-const ManualTransactionHistory = () => {
-    return (
-        <div>
-            <Menu />
-            <Container fluid className="sidebar">
-                <Row className="h-100">
-                    <Col
-                        xs={3}
-                        sm={3}
-                        md={3}
-                        lg={2}
-                        xl={2}
-                        style={{ backgroundColor: "#1B1B1B" }}
-                    >
-                        <Sidebar></Sidebar>
-                    </Col>
-                    <Col
-                        xs={9}
-                        sm={9}
-                        md={9}
-                        lg={10}
-                        xl={10}
-                        style={{ marginTop: "30px" }}
-                    >
-                        <Row className="setpaddinginnerpage">
-                            <Col md={4}>
-                                <p className="sootfoliobreadclub">Manual Transaction history</p>
-                            </Col>
-                            <Col md={5}></Col>
-                        </Row>
-                        <div className="mt-5 setpaddinginnerpage">
-                            <Container className="makedisplayyinblockviewport">
-                                <Row>
-                                    <Col md={12} className="makeinrowtitlesviewportfolio">
-                                        <Col md={3} xs={3}>
-                                            <p className="joinleaguetitles">Users</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="joinleaguetitles">Subscription</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="joinleaguetitles">Payment Method</p>
-                                        </Col>
-                                        <Col md={3} xs={3}>
-                                            <p className="joinleaguetitles">Transaction Hash</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactiontitlesmarg">Status</p>
-                                        </Col>
-                                    </Col>
-                                </Row>
-                                <Row className="mt-3">
-                                    <Col md={12} className="viewportsinglebg">
-                                    <Col md={3} xs={3}>
-                                            <p className="transactionlistdta">Alen David </p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdta">Platinum Plan</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdta">Stipe</p>
-                                        </Col>
-                                        <Col md={3} xs={3}>
-                                            <p className="transactionlistdta">0cerXi............o9Xn</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdtawithbg">successfull</p>
-                                        </Col>
-                                    </Col>
-                                </Row>    
-                                <Row className="mt-3">
-                                    <Col md={12} className="viewportsinglebg">
-                                    <Col md={3} xs={3}>
-                                            <p className="transactionlistdta">Smith Ravor </p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdta">Golden Plan</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdta">Stipe</p>
-                                        </Col>
-                                        <Col md={3} xs={3}>
-                                            <p className="transactionlistdta">0cerXi............o9Xn</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdtawithbg">successfull</p>
-                                        </Col>
-                                    </Col>
-                                </Row>    
-                                <Row className="mt-3">
-                                    <Col md={12} className="viewportsinglebg">
-                                    <Col md={3} xs={3}>
-                                            <p className="transactionlistdta">Hawks Jaim </p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdta">Silver</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdta">Bank Account</p>
-                                        </Col>
-                                        <Col md={3} xs={3}>
-                                            <p className="transactionlistdta">0cerXi............o9Xn</p>
-                                        </Col>
-                                        <Col md={2} xs={2}>
-                                            <p className="transactionlistdtawithbg">successfull</p>
-                                        </Col>
-                                    </Col>
-                                </Row>    
-                            </Container>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-    )
-}
+import "../Assets/Css/ManualTransectionHistory.css";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetAllTransactionHistory,
+  clearErrors,
+  clearMessages,
+} from "./../storeRedux/actions";
+import { Puff } from "react-loader-spinner";
+import Pagination from "@mui/material/Pagination";
+import { makeStyles } from "@mui/styles";
 
-export default ManualTransactionHistory
+const useStyles = makeStyles({
+  root: {
+    "& .MuiPaginationItem-root": {
+      color: "white",
+      backgroundColor: "black",
+      "&:hover": {
+        backgroundColor: "black",
+        color: "white",
+      },
+      "& .Mui-selected": {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+  },
+});
+const ManualTransactionHistory = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const [page, setPage] = useState(1);
+  const {
+    errors: error,
+    message,
+    cryptoTransactions,
+    sessionExpireError,
+    loading,
+    totalPages,
+  } = useSelector((state) => state.subscriptionReducer);
+
+  useEffect(() => {
+    if (error.length > 0) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (sessionExpireError !== "") {
+      toast.error(sessionExpireError);
+      dispatch(clearErrors());
+      setTimeout(() => navigate("/"), 1000);
+    }
+    if (message !== "") {
+      toast.success(message);
+      dispatch(clearMessages());
+    }
+  }, [error, sessionExpireError, message]);
+
+  useEffect(() => {
+    dispatch(GetAllTransactionHistory(page));
+  }, [page]);
+  return (
+    <div>
+      <Menu />
+      <Container fluid className="sidebar">
+        <Row className="h-100">
+          <Col
+            xs={3}
+            sm={3}
+            md={3}
+            lg={2}
+            xl={2}
+            style={{ backgroundColor: "#1B1B1B" }}
+          >
+            <Sidebar></Sidebar>
+          </Col>
+          <Col
+            xs={9}
+            sm={9}
+            md={9}
+            lg={10}
+            xl={10}
+            style={{ marginTop: "30px" }}
+          >
+            <Row className="setpaddinginnerpage">
+              <Col md={4}>
+                <p className="sootfoliobreadclub">Manual Transaction history</p>
+              </Col>
+              <Col md={5}></Col>
+            </Row>
+            <div className="mt-5 setpaddinginnerpage">
+              <Container className="makedisplayyinblockviewport">
+                <Row className="mt-3">
+                  {loading ? (
+                    <Puff
+                      height="60"
+                      width="60"
+                      radius="6"
+                      color="white"
+                      ariaLabel="loading"
+                      wrapperStyle
+                      wrapperClass
+                    />
+                  ) : cryptoTransactions.length > 0 ? (
+                    cryptoTransactions.map((data, ind) => {
+                      console.log("data is", data);
+                      return (
+                        <Col md={12} className="viewportsinglebg" key={ind}>
+                          <Col md={3} xs={3}>
+                            <p className="transactionlistdta">
+                              {data?.user?.name && data.user.name}
+                            </p>
+                          </Col>
+                          <Col md={2} xs={2}>
+                            <p className="transactionlistdta">
+                              {data?.subscription?.name &&
+                                data.subscription.name}
+                            </p>
+                          </Col>
+                          <Col md={2} xs={2}>
+                            <p className="transactionlistdta">
+                              {data?.paymentMethod && data.paymentMethod}
+                            </p>
+                          </Col>
+                          <Col md={3} xs={3}>
+                            <p className="transactionlistdta">
+                              {data?.transactionHash && data.transactionHash}
+                            </p>
+                          </Col>
+                          <Col md={2} xs={2}>
+                            <p className="transactionlistdtawithbg">
+                              {data?.status && data.status}
+                            </p>
+                          </Col>
+                        </Col>
+                      );
+                    })
+                  ) : (
+                    <h1>No transaction found</h1>
+                  )}
+                </Row>
+              </Container>
+            </div>
+            {loading
+              ? ""
+              : cryptoTransactions.length > 0 && (
+                  <Pagination
+                    classes={{ root: classes.root }}
+                    variant="outlined"
+                    count={totalPages}
+                    page={page}
+                    size="large"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: "2rem",
+                    }}
+                    showFirstButton
+                    showLastButton
+                    onChange={(e, value) => setPage(value)}
+                  />
+                )}
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+export default ManualTransactionHistory;

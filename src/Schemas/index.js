@@ -26,7 +26,8 @@ export const addLeagueTypeSchema = Yup.object({
   // gameModeId: Yup.string().required("Game Mode is required"),
   leagueTitle: Yup.string().required("League Title is required"),
   status: Yup.string().optional(),
-  investableBudget: Yup.string().required("Investment Budget is required"),
+  investableBudget: Yup.number().required("Investment Budget is required"),
+  borrowAmount: Yup.number().required("Borrow Amount is required"),
 });
 
 export const addGameModeSchema = Yup.object({

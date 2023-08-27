@@ -5,7 +5,7 @@ export const GetAllGameLeague = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_GAME_LEAGUE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result;
       if (page) {
         result = await axios.get(
@@ -37,7 +37,7 @@ export const GetAllGameLeague = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -56,7 +56,7 @@ export const GetSingleGameLeague = (leagueId) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_SINGLE_GAME_LEAGUE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues/${leagueId}`,
         {
@@ -72,7 +72,7 @@ export const GetSingleGameLeague = (leagueId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -90,7 +90,7 @@ export const AddGameLeague = (body) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.ADD_GAME_LEAGUE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues`,
         body,
@@ -106,7 +106,7 @@ export const AddGameLeague = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -125,7 +125,7 @@ export const UpdateGameLeague = (body, gameLeagueId) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.UPDATE_SINGLE_GAME_LEAGUE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues/${gameLeagueId}`,
         body,
@@ -141,7 +141,7 @@ export const UpdateGameLeague = (body, gameLeagueId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

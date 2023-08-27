@@ -5,7 +5,7 @@ export const Signin = (body) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_LOGIN_REQUEST });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/admin/login`,
         body,
@@ -16,16 +16,16 @@ export const Signin = (body) => {
         }
       );
       const { data } = result;
-      localStorage.setItem("adminToken", data.tokens.access.token);
-      localStorage.setItem("adminRefreshToken", data.tokens.refresh.token);
-      localStorage.setItem("admin", JSON.stringify(data.user));
+      sessionStorage.setItem("adminToken", data.tokens.access.token);
+      sessionStorage.setItem("adminRefreshToken", data.tokens.refresh.token);
+      sessionStorage.setItem("admin", JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_LOGIN_SUCCESS,
         payload: "Login Successfully",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -44,7 +44,7 @@ export const GetAllUser = (page) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.GET_ALL_USER_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/auth?page=${page}&limit=10`,
         {
@@ -64,7 +64,7 @@ export const GetAllUser = (page) => {
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -83,7 +83,7 @@ export const GetSingleUser = (userId) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.GET_SINGLE_USER_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/auth/${userId}`,
         {
@@ -99,7 +99,7 @@ export const GetSingleUser = (userId) => {
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -118,7 +118,7 @@ export const UpdateUserStatus = (body, userId) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.UPDATE_USER_STATUS_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/auth/status/${userId}`,
         body,
@@ -134,7 +134,7 @@ export const UpdateUserStatus = (body, userId) => {
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -152,14 +152,14 @@ export const logOut = () => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_LOGOUT_REQUEST });
     try {
-      localStorage.clear();
+      sessionStorage.clear();
       dispatch({
         type: authConstant.USER_LOGOUT_SUCCESS,
         payload: "Logout Successfully",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

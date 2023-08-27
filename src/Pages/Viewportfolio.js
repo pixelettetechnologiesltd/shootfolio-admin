@@ -18,7 +18,7 @@ import {
 import { Puff } from "react-loader-spinner";
 const Viewportfolio = () => {
   const { id } = useParams();
-  const adminUser = JSON.parse(localStorage.getItem("admin"));
+  const adminUser = JSON.parse(sessionStorage.getItem("admin"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {

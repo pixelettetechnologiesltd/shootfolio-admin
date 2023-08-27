@@ -5,7 +5,7 @@ export const GetAllGameMode = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameModeConstant.GET_GAME_MODE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result;
       if (page) {
         result = await axios.get(
@@ -37,7 +37,7 @@ export const GetAllGameMode = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -56,7 +56,7 @@ export const AddGameMode = (body) => {
   return async (dispatch) => {
     dispatch({ type: gameModeConstant.ADD_GAME_MODE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gamemodes`,
         body,
@@ -72,7 +72,7 @@ export const AddGameMode = (body) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -91,7 +91,7 @@ export const GetSingleGameMode = (gameModeId) => {
   return async (dispatch) => {
     dispatch({ type: gameModeConstant.GET_SINGLE_GAME_MODE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       let result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gamemodes/${gameModeId}`,
         {
@@ -107,7 +107,7 @@ export const GetSingleGameMode = (gameModeId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -126,7 +126,7 @@ export const UpdateSingleGameMode = (body, gameModeId) => {
   return async (dispatch) => {
     dispatch({ type: gameModeConstant.UPDATE_SINGLE_GAME_MODE_REQUEST });
     try {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gamemodes/${gameModeId}`,
         body,
@@ -142,7 +142,7 @@ export const UpdateSingleGameMode = (body, gameModeId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
