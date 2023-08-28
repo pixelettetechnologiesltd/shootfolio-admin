@@ -169,20 +169,20 @@ const ManualTransactionHistory = () => {
                             </p>
                           </Col>
                           <Col md={1} xs={1} style={{ cursor: "pointer" }}>
-                            <p
-                              className="transactionlistdtawithbg"
+                            <Button variant="danger"
+                              className="rejectbuttontrans"
                               onClick={() => handleRejectStatus(data?._id)}
                             >
                               Reject
-                            </p>
+                            </Button>
                           </Col>
                           <Col md={1} xs={1} style={{ cursor: "pointer" }}>
-                            <p
-                              className="transactionlistdtawithbg"
+                            <Button variant="success"
+                              className="rejectbuttontrans"
                               onClick={() => handleAcceptStatus(data?._id)}
                             >
                               Accept
-                            </p>
+                            </Button>
                           </Col>
                         </Col>
                       );
