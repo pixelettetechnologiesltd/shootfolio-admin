@@ -120,13 +120,13 @@ const ManualTransactionHistory = () => {
                   ) : cryptoTransactions.length > 0 ? (
                     cryptoTransactions.map((data, ind) => {
                       return (
-                        <Col md={12} className="viewportsinglebg" key={ind}>
-                          <Col md={3} xs={3}>
+                        <Col md={12} className="viewportsinglebg mt-3" key={ind}>
+                          <Col md={2} xs={2}>
                             <p className="transactionlistdta">
                               {data?.user?.name && data.user.name}
                             </p>
                           </Col>
-                          <Col md={2} xs={2}>
+                          <Col md={1} xs={2}>
                             <p className="transactionlistdta">
                               {data?.subscription?.name &&
                                 data.subscription.name}
@@ -137,17 +137,18 @@ const ManualTransactionHistory = () => {
                               {data?.paymentMethod && data.paymentMethod}
                             </p>
                           </Col>
-                          <Col md={3} xs={3}>
+                          <Col md={4} xs={2} className="wraphash">
                             <p className="transactionlistdta">
                               {data?.transactionHash && data.transactionHash}
                             </p>
                           </Col>
-                          <Col md={2} xs={2}>
+                          
+                          <Col md={1} xs={1}>
                             <p className="transactionlistdtawithbg">
                               {data?.status && data.status}
                             </p>
                           </Col>
-                          <Col md={2} xs={2} style={{ cursor: "pointer" }}>
+                          <Col md={1} xs={1} style={{ cursor: "pointer" }}>
                             <p
                               className="transactionlistdtawithbg"
                               onClick={() => handleRejectStatus(data?._id)}
@@ -155,7 +156,7 @@ const ManualTransactionHistory = () => {
                               Reject
                             </p>
                           </Col>
-                          <Col md={2} xs={2} style={{ cursor: "pointer" }}>
+                          <Col md={1} xs={1} style={{ cursor: "pointer" }}>
                             <p
                               className="transactionlistdtawithbg"
                               onClick={() => handleAcceptStatus(data?._id)}
