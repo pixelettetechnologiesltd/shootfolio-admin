@@ -231,3 +231,42 @@ export const UpdateCryptoTransStatus = (body, paymentId) => {
     }
   };
 };
+
+export const UpdateSubscriptionPlanAccordingToUser = (
+  userId,
+  subscriptionId
+) => {
+  return async (dispatch) => {
+    dispatch({
+      type: subscriptionPlanConstant.UPDATE_SUBSCRIPTION_PLAN_REQUEST,
+    });
+    try {
+      const token = sessionStorage.getItem("adminToken");
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/update/subscription/${userId}/${subscriptionId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: subscriptionPlanConstant.UPDATE_SUBSCRIPTION_PLAN_SUCCESS,
+        payload: "Subscription plan has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: subscriptionPlanConstant.UPDATE_SUBSCRIPTION_PLAN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
