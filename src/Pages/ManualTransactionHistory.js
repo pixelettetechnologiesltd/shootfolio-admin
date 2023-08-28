@@ -99,13 +99,33 @@ const ManualTransactionHistory = () => {
             style={{ marginTop: "30px" }}
           >
             <Row className="setpaddinginnerpage">
-              <Col md={4}>
+              <Col md={6}>
                 <p className="sootfoliobreadclub">Manual Transaction history</p>
               </Col>
               <Col md={5}></Col>
             </Row>
             <div className="mt-5 setpaddinginnerpage">
               <Container className="makedisplayyinblockviewport">
+              <Row>
+                  <Col md={12} className="makeinrowtitlesviewportfolio">
+                    <Col md={2} xs={2}>
+                      <p className="joinleaguetitles">Name</p>
+                    </Col>
+                    <Col md={1} xs={1}>
+                      <p className="joinleaguetitles">Plan</p>
+                    </Col>
+                    <Col md={2} xs={2}>
+                      <p className="joinleaguetitles">Payment Method</p>
+                    </Col>
+                    <Col md={4} xs={4}>
+                      <p className="joinleaguetitles">Transaction Hash</p>
+                    </Col>
+                    <Col md={3} xs={3}>
+                      <p className="joinleaguetitles">Status</p>
+                    </Col>
+                    
+                  </Col>
+                </Row>
                 <Row className="mt-3">
                   {loading ? (
                     <Puff
