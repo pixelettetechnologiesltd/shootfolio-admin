@@ -10,7 +10,9 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  GetAllSubscriptionPlan,
   GetSingleUser,
+  UpdateSubscriptionPlanAccordingToUser,
   clearErrors,
   clearMessages,
 } from "./../storeRedux/actions";
@@ -20,23 +22,24 @@ import { UpdateUserSchema } from "./../Schemas";
 
 const Settings = () => {
   const [buttonPopupOne, setButtonPopupOne] = useState(false);
+  const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
 
   const {
-    singleUser,
+    subscriptionPlans,
     message,
     errors: error,
     sessionExpireError,
     loading,
-  } = useSelector((state) => state.authReducer);
+  } = useSelector((state) => state.subscriptionReducer);
 
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     useFormik({
       initialValues: {
-        name: singleUser?.name && singleUser.name,
-        userName: singleUser?.userName && singleUser.userName,
+        name: "",
+        userName: "",
       },
       enableReinitialize: true,
       validationSchema: UpdateUserSchema,
@@ -48,25 +51,40 @@ const Settings = () => {
     });
 
   useEffect(() => {
-    if (error.length > 0) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-    if (sessionExpireError !== "") {
-      toast.error(sessionExpireError);
-      dispatch(clearErrors());
-      setTimeout(() => navigate("/"), 1000);
-    }
-    if (message !== "") {
-      toast.success(message);
-      dispatch(clearMessages());
-      setTimeout(() => navigate(-1), 2000);
+    if (!id) {
+      return navigate("/dashboard/users");
+    } else {
+      if (error.length > 0) {
+        toast.error(error);
+        dispatch(clearErrors());
+      }
+      if (sessionExpireError !== "") {
+        toast.error(sessionExpireError);
+        dispatch(clearErrors());
+        setTimeout(() => navigate("/"), 1000);
+      }
+      if (message !== "") {
+        toast.success(message);
+        dispatch(clearMessages());
+        setTimeout(() => navigate(-1), 2000);
+      }
     }
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetSingleUser(id));
+    if (id) {
+      dispatch(GetAllSubscriptionPlan(1));
+    }
   }, []);
+
+  const handleUpdateSubscription = () => {
+    console.log("subscriptionPlan is", subscriptionPlan);
+    if (!subscriptionPlan) {
+      return toast.error("Plan is required");
+    } else {
+      dispatch(UpdateSubscriptionPlanAccordingToUser(id, subscriptionPlan));
+    }
+  };
   return (
     <div>
       <Menu />
@@ -104,8 +122,8 @@ const Settings = () => {
             </Row>
             <Row className="setpaddinginnerpage mt-5 mb-5">
               <Col md={6}>
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-4" controlId="formGroupText">
+                <Form>
+                  {/* <Form.Group className="mb-4" controlId="formGroupText">
                     <Form.Label className="makelabelleft">Plan Name</Form.Label>
                     <Form.Control
                       className="makeinputborder"
@@ -142,9 +160,37 @@ const Settings = () => {
                     ) : (
                       ""
                     )}
+                  </Form.Group> */}
+                  <Form.Group
+                    controlId="formFile"
+                    className="mb-4"
+                    classNamem="makelabelandinputinline"
+                  >
+                    <Form.Label className="makelabelleft">
+                      Select Subscription Plan
+                    </Form.Label>
+                    <Form.Select
+                      className="makeinputborder"
+                      aria-label="Default select example"
+                      name="gameModeId"
+                      value={subscriptionPlan}
+                      onChange={(e) => setSubscriptionPlan(e.target.value)}
+                    >
+                      {subscriptionPlans.length > 0 &&
+                        subscriptionPlans.map((item, ind) => {
+                          return (
+                            <option key={ind} value={item?._id}>
+                              {item?.name && item.name}
+                            </option>
+                          );
+                        })}
+                    </Form.Select>
                   </Form.Group>
                   <div className="makeplanbuttonend">
-                    <Button className="planformsubmitbutton" type="submit">
+                    <Button
+                      className="planformsubmitbutton"
+                      onClick={() => handleUpdateSubscription()}
+                    >
                       {loading ? (
                         <Puff
                           height="20"
