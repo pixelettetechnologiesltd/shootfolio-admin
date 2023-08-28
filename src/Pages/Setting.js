@@ -78,11 +78,11 @@ const Settings = () => {
   }, []);
 
   const handleUpdateSubscription = () => {
-    console.log("subscriptionPlan is", subscriptionPlan);
     if (!subscriptionPlan) {
       return toast.error("Plan is required");
     } else {
-      dispatch(UpdateSubscriptionPlanAccordingToUser(id, subscriptionPlan));
+      let result = { subscriptionId: subscriptionPlan };
+      dispatch(UpdateSubscriptionPlanAccordingToUser(id, result));
     }
   };
   return (

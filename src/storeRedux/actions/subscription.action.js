@@ -232,10 +232,7 @@ export const UpdateCryptoTransStatus = (body, paymentId) => {
   };
 };
 
-export const UpdateSubscriptionPlanAccordingToUser = (
-  userId,
-  subscriptionId
-) => {
+export const UpdateSubscriptionPlanAccordingToUser = (userId, body) => {
   return async (dispatch) => {
     dispatch({
       type: subscriptionPlanConstant.UPDATE_SUBSCRIPTION_PLAN_REQUEST,
@@ -243,7 +240,8 @@ export const UpdateSubscriptionPlanAccordingToUser = (
     try {
       const token = sessionStorage.getItem("adminToken");
       await axios.patch(
-        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/update/subscription/${userId}/${subscriptionId}`,
+        `${process.env.REACT_APP_BASE_URL}/v1/api/auth/update/subscription/${userId}`,
+        body,
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
