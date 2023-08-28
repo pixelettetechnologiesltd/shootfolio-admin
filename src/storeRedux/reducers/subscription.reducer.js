@@ -19,12 +19,14 @@ const subscriptionPlanReducer = (state = initialState, action) => {
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_REQUEST:
+    case subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_SUCCESS:
     case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_SUCCESS:
+    case subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -57,6 +59,7 @@ const subscriptionPlanReducer = (state = initialState, action) => {
     case subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_FAILURE:
+    case subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_FAILURE:
       return {
         ...state,
         loading: false,

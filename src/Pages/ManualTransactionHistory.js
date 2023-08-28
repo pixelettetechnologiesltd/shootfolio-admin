@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllTransactionHistory,
+  UpdateCryptoTransStatus,
   clearErrors,
   clearMessages,
 } from "./../storeRedux/actions";
@@ -64,6 +65,16 @@ const ManualTransactionHistory = () => {
   useEffect(() => {
     dispatch(GetAllTransactionHistory(page));
   }, [page]);
+
+  const handleRejectStatus = (id) => {
+    let result = { status: "Reject" };
+    dispatch(UpdateCryptoTransStatus(result, id));
+  };
+
+  const handleAcceptStatus = (id) => {
+    let result = { status: "Approve" };
+    dispatch(UpdateCryptoTransStatus(result, id));
+  };
   return (
     <div>
       <Menu />
@@ -108,7 +119,6 @@ const ManualTransactionHistory = () => {
                     />
                   ) : cryptoTransactions.length > 0 ? (
                     cryptoTransactions.map((data, ind) => {
-                      console.log("data is", data);
                       return (
                         <Col md={12} className="viewportsinglebg" key={ind}>
                           <Col md={3} xs={3}>
@@ -135,6 +145,22 @@ const ManualTransactionHistory = () => {
                           <Col md={2} xs={2}>
                             <p className="transactionlistdtawithbg">
                               {data?.status && data.status}
+                            </p>
+                          </Col>
+                          <Col md={2} xs={2} style={{ cursor: "pointer" }}>
+                            <p
+                              className="transactionlistdtawithbg"
+                              onClick={() => handleRejectStatus(data?._id)}
+                            >
+                              Reject
+                            </p>
+                          </Col>
+                          <Col md={2} xs={2} style={{ cursor: "pointer" }}>
+                            <p
+                              className="transactionlistdtawithbg"
+                              onClick={() => handleAcceptStatus(data?._id)}
+                            >
+                              Accept
                             </p>
                           </Col>
                         </Col>

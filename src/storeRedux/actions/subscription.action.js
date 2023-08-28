@@ -193,3 +193,41 @@ export const GetAllTransactionHistory = (page) => {
     }
   };
 };
+
+export const UpdateCryptoTransStatus = (body, paymentId) => {
+  return async (dispatch) => {
+    dispatch({
+      type: subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_REQUEST,
+    });
+    try {
+      const token = sessionStorage.getItem("adminToken");
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/cryptopayment/${paymentId}`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch(GetAllTransactionHistory(1));
+      dispatch({
+        type: subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_SUCCESS,
+        payload: "Status has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
