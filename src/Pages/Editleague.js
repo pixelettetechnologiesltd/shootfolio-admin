@@ -48,6 +48,8 @@ const Defineleaguetype = () => {
         investableBudget:
           singleGameLeague?.investableBudget &&
           singleGameLeague.investableBudget,
+        borrowAmount:
+          singleGameLeague?.borrowAmount && singleGameLeague.borrowAmount,
       },
       enableReinitialize: true,
       validationSchema: EditLeagueTypeSchema,
@@ -58,6 +60,7 @@ const Defineleaguetype = () => {
           leagueTitle,
           status,
           investableBudget,
+          borrowAmount,
         } = values;
         let newGameTpeId;
         if (gameTypeId === singleGameLeague.gameTypeId.gameTitle) {
@@ -77,6 +80,7 @@ const Defineleaguetype = () => {
           leagueTitle,
           status,
           investableBudget,
+          borrowAmount,
         };
         dispatch(UpdateGameLeague(finalResult, id));
       },
@@ -261,6 +265,27 @@ const Defineleaguetype = () => {
                       label="Shows game status on or off"
                     />
                   </Form.Group> */}
+                  <Form.Group className="mb-4" controlId="formGroupText">
+                    <Form.Label className="makelabelleft">
+                      Borrow Amount
+                    </Form.Label>
+                    <Form.Control
+                      className="makeinputborder"
+                      type="number"
+                      placeholder="Add borrow limit"
+                      name="borrowAmount"
+                      value={values.borrowAmount}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {errors.borrowAmount && touched.borrowAmount ? (
+                      <p className="form-error custom-form-error">
+                        {errors.borrowAmount}
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                  </Form.Group>
                   <Form.Group
                     controlId="formFile"
                     className="mb-4"

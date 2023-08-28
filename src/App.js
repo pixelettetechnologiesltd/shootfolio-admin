@@ -46,7 +46,10 @@ function App() {
           }}
         />
         <Routes>
-        <Route path="/manual-transaction-history" element={<ManualTransactionHistory/>}></Route>
+          <Route
+            path="/manual-transaction-history"
+            element={<ManualTransactionHistory />}
+          ></Route>
 
           <Route path="/addquestion" element={<Addquestion />}></Route>
           <Route path="/quiz" element={<Quiz />}></Route>
