@@ -57,8 +57,8 @@ const Addnewclub = () => {
       if (!status) {
         finalResult.append("status", false);
       }
-      if (status === "true") {
-        finalResult.append("status", true);
+      if (status) {
+        finalResult.append("status", status);
       }
       dispatch(AddClub(finalResult));
       // action.resetForm();
@@ -218,12 +218,7 @@ const Addnewclub = () => {
                     )}
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="switch">
-                    <Form.Label
-                      className="makelabelleft"
-                      style={{ display: "none" }}
-                    >
-                      Status
-                    </Form.Label>
+                    <Form.Label className="makelabelleft">Status</Form.Label>
                     <Form.Check
                       type="switch"
                       id="custom-switch"
