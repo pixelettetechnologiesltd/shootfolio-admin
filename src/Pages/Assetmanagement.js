@@ -178,7 +178,7 @@ const Assetmanagement = () => {
                             <p className="coinnameviewport">
                               ${" "}
                               {data.quote?.USD?.price &&
-                                Math.floor(data.quote.USD.price)}
+                                data.quote.USD.price.toFixed(7)}
                             </p>
                           </Col>
                           <Col md={2} xs={2}>
