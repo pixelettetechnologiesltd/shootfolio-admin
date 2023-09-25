@@ -109,10 +109,13 @@ const Viewportfolio = () => {
                       <p className="joinleaguetitles">Symbol</p>
                     </Col>
                     <Col md={2} xs={2}>
+                      <p className="joinleaguetitles">Unit Price</p>
+                    </Col>
+                    <Col md={2} xs={2}>
                       <p className="joinleaguetitles">Quantity</p>
                     </Col>
                     <Col md={2} xs={2}>
-                      <p className="joinleaguetitles">Price</p>
+                      <p className="joinleaguetitles">Amount</p>
                     </Col>
                   </Col>
                 </Row>
@@ -153,6 +156,19 @@ const Viewportfolio = () => {
                           </Col>
                           <Col md={2} xs={2}>
                             <p className="coinnameviewport">
+                              {" "}
+                              ${" "}
+                              {parseFloat(data.coin?.quote?.USD?.price) > 0.01
+                                ? parseFloat(
+                                    data.coin?.quote?.USD?.price
+                                  ).toFixed(3)
+                                : parseFloat(
+                                    data.coin?.quote?.USD?.price
+                                  ).toFixed(7)}{" "}
+                            </p>
+                          </Col>
+                          <Col md={2} xs={2}>
+                            <p className="coinnameviewport">
                               {data.quantity && data.quantity}
                             </p>
                           </Col>
@@ -160,8 +176,10 @@ const Viewportfolio = () => {
                             <p className="coinnameviewport">
                               {" "}
                               ${" "}
-                              {data.coin?.quote?.USD?.price &&
-                                Math.floor(data.coin?.quote.USD.price)}
+                              {data.quantity &&
+                                parseFloat(
+                                  data.quantity * data.coin?.quote?.USD?.price
+                                ).toFixed(3)}
                             </p>
                           </Col>
                           <Col md={2} xs={2}>

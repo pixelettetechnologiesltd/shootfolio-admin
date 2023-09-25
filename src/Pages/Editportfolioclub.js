@@ -22,7 +22,7 @@ import {
 import { Puff } from "react-loader-spinner";
 
 const Editportfolioinclub = () => {
-  const { id } = useParams();
+  const { id, ecoin, equantity } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -83,7 +83,7 @@ const Editportfolioinclub = () => {
     dispatch(GetAllCoin());
     dispatch(GetSinglePortfolio(id));
   }, []);
-
+  console.log(singleClub);
   return (
     <div>
       <Menu />
@@ -123,7 +123,9 @@ const Editportfolioinclub = () => {
                     className="mb-4"
                     classNamem="makelabelandinputinline"
                   >
-                    <Form.Label className="makelabelleft">Coin Name</Form.Label>
+                    <Form.Label className="makelabelleft">
+                      Select Coin
+                    </Form.Label>
                     <Form.Select
                       className="makeinputborder"
                       aria-label="Default select example"
@@ -132,12 +134,17 @@ const Editportfolioinclub = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     >
+                      <option>--Select--</option>
                       {loading && <option>Loading Please Wait...</option>}
                       {coin.length > 0 &&
                         coin.map((item, ind) => {
                           return (
                             <option value={item._id} key={ind}>
-                              {item.name && item.name}
+                              {item.name && item.name} (
+                              {parseFloat(item.quote?.USD?.price) > 0.01
+                                ? parseFloat(item.quote?.USD?.price).toFixed(3)
+                                : parseFloat(item.quote?.USD?.price).toFixed(7)}
+                              )
                             </option>
                           );
                         })}
@@ -184,14 +191,12 @@ const Editportfolioinclub = () => {
                   </Form.Group> */}
 
                   <Form.Group className="mb-4" controlId="formGroupText">
-                    <Form.Label className="makelabelleft">
-                      Number of Units
-                    </Form.Label>
+                    <Form.Label className="makelabelleft">Quantity</Form.Label>
                     <InputGroup className="mb-3 linkbuttonright">
                       <Form.Control
                         type="number"
                         className="makeinputborder"
-                        placeholder="Add quantity of units"
+                        placeholder={equantity}
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                         name="quantity"
@@ -199,6 +204,7 @@ const Editportfolioinclub = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
+
                       <Button
                         className="formgroupbuttojn"
                         variant="outline-secondary"
@@ -207,6 +213,7 @@ const Editportfolioinclub = () => {
                         <RiExternalLinkLine />
                       </Button>
                     </InputGroup>
+
                     {errors.quantity && touched.quantity ? (
                       <p className="form-error custom-form-error">
                         {errors.quantity}
