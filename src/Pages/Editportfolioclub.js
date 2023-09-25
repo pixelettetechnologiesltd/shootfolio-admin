@@ -39,9 +39,10 @@ const Editportfolioinclub = () => {
     useFormik({
       initialValues: {
         // club: singleClub?.club?.title && singleClub.club.title,
-        coin: singleClub?.coin?.name && singleClub.coin.name,
+        coin: singleClub?.coin?._id && singleClub.coin._id,
         quantity: singleClub?.quantity && singleClub.quantity,
       },
+      enableReinitialize: true,
       validationSchema: addPortfolioSchema,
       onSubmit: (values) => {
         const { coin, quantity } = values;

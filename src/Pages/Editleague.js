@@ -37,8 +37,7 @@ const Defineleaguetype = () => {
     useFormik({
       initialValues: {
         gameTypeId:
-          singleGameLeague?.gameTypeId?.gameTitle &&
-          singleGameLeague.gameTypeId.gameTitle,
+          singleGameLeague?.gameTypeId?.id && singleGameLeague.gameTypeId.id,
         // gameModeId:
         //   singleGameLeague?.gameModeId?.modeTitle &&
         //   singleGameLeague.gameModeId.modeTitle,
