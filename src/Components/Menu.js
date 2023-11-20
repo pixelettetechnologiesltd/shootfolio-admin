@@ -27,11 +27,6 @@ const Menu = () => {
               </div>
             </div>
             <div>
-              <div className="notificationbg">
-                <span className="bellicon">
-                  <BiBell />
-                </span>
-              </div>
             </div>
           </div>
         </Col>

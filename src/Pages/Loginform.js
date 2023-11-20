@@ -46,7 +46,7 @@ const Loginform = () => {
     if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate("/dashboard"), 2000);
+      setTimeout(() => navigate("/dashboard/users"), 2000);
     }
   }, [error, sessionExpireError, message]);
   return (

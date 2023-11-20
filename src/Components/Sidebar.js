@@ -75,7 +75,7 @@ const Sidebar = () => {
   return (
     <>
       <Nav className="flex-column">
-        <Nav.Item>
+        {/* <Nav.Item>
           <NavLink
             to="/dashboard/"
             className="nav-link"
@@ -93,7 +93,7 @@ const Sidebar = () => {
             </span>
             <span className="dashboard-text">Dashboard</span>
           </NavLink>
-        </Nav.Item>
+        </Nav.Item> */}
         <Nav.Item>
           <NavLink
             to="/dashboard/users"

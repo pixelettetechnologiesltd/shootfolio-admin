@@ -95,7 +95,7 @@ const Assetmanagement = () => {
             xl={10}
             style={{ marginTop: "30px" }}
           >
-            <Row className="setpaddinginnerpage">
+            {/* <Row className="setpaddinginnerpage">
               <Col md={4}>
                 <div className="makebreadinrow">
                   <span className="breadgreenfootball">
@@ -119,7 +119,7 @@ const Assetmanagement = () => {
                   Filter{" "}
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
             <div className="mt-5 setpaddinginnerpage">
               <Container className="makedisplayyinblockviewport">
                 <Row>
@@ -186,7 +186,12 @@ const Assetmanagement = () => {
                           </Col>
                           <Col md={1} xs={2}>
                             <div className="makebuttonendviewport paddrightrowmanage">
-                              <Dropdown>
+                            <Button className="gamdemodeeditbutton" onClick={() =>
+                                      dispatch(DeleteCoin(data._id))
+                                    } >
+                              Delete
+                            </Button>
+                              {/* <Dropdown>
                                 <Dropdown.Toggle
                                   variant="success"
                                   className="managepage"
@@ -200,17 +205,15 @@ const Assetmanagement = () => {
                                     Action
                                   </Dropdown.Item>
                                   <Dropdown.Item
-                                    onClick={() =>
-                                      dispatch(DeleteCoin(data._id))
-                                    }
+                                    
                                   >
                                     Delete
                                   </Dropdown.Item>
-                                  {/* <Dropdown.Item href="#/action-3">
+                                  <Dropdown.Item href="#/action-3">
                                     Something else
-                                  </Dropdown.Item> */}
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
-                              </Dropdown>
+                              </Dropdown> */}
                             </div>
                           </Col>
                         </Col>

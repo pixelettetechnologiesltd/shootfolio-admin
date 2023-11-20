@@ -73,6 +73,7 @@ const Users = () => {
 
   useEffect(() => {
     dispatch(GetAllUser(page));
+
   }, [page]);
 
   return (
@@ -99,52 +100,6 @@ const Users = () => {
             style={{ marginTop: "30px" }}
             className=" addspaceatbottom"
           >
-            <Row className="addpaddinguser">
-              <Col md={4}>
-                <div className="usercardone">
-                  <p className="cardheqadinguser">2HRS+</p>
-                  <div className="headsubheadinlineusercard">
-                    <p className="cardsubhead">Time</p>
-                    <p className="cardsparagraph">Interaction Time</p>
-                  </div>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="usercardtwo">
-                  <p className="cardheqadinguser">3960+</p>
-                  <div className="headsubheadinlineusercard">
-                    <p className="cardsubhead">Visitors</p>
-                    <p className="cardsparagraph">Active Site Visitors</p>
-                  </div>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="usercardthree">
-                  <p className="cardheqadinguser">100+</p>
-                  <div className="headsubheadinlineusercard">
-                    <p className="cardsubhead">Total Users</p>
-                    <p className="cardsparagraph">Active Users</p>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={9}></Col>
-              <Col md={3} className="makebuttonspacemanage">
-                <Button className="sortbtnmanage">
-                  <span className="sortmanagelogo">
-                    <FaSortAlphaUp />
-                  </span>
-                  Sort by{" "}
-                </Button>
-                <Button className="sortbtnmanage">
-                  <span className="sortmanagelogo">
-                    <BsFilter />
-                  </span>
-                  Filter{" "}
-                </Button>
-              </Col>
-            </Row>
             <div className="addpaddinguser">
               {loading ? (
                 <Puff
@@ -190,6 +145,7 @@ const Users = () => {
                         </Col>
                         <Col md={3} xs={2}>
                           <div className="makeuserrowbtninline">
+                          {data.status === 'inactive' ? (
                             <Button
                               className="userrowstatusbtn"
                               disabled={loading ? true : false}
@@ -204,6 +160,7 @@ const Users = () => {
                             >
                               Active{" "}
                             </Button>
+                            ) : (
                             <Button
                               className="userrowstatusbtn"
                               onClick={() =>
@@ -218,6 +175,7 @@ const Users = () => {
                             >
                               Inactive{" "}
                             </Button>
+                            )}
                             <Button
                               className="userrowstatusbtn"
                               onClick={() =>

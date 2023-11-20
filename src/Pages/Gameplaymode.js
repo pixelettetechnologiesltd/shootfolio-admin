@@ -141,9 +141,9 @@ const Gameplaymode = () => {
                           <Link
                             to={`/Dashboard/game/editgameplaymode/${item.id}`}
                           >
-                            <Button className="gamdemodeeditbutton">
+                            {/* <Button className="gamdemodeeditbutton">
                               Edit
-                            </Button>
+                            </Button> */}
                           </Link>
                         </Col>
                       </div>

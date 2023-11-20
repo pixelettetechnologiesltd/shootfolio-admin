@@ -54,7 +54,8 @@ function App() {
           <Route path="/addquestion" element={<Addquestion />}></Route>
           <Route path="/quiz" element={<Quiz />}></Route>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/Dashboard" element={<Home />}></Route>
+            {/* Home  */}
+            <Route path="/Dashboard" element={<Users />}></Route>
             <Route path="/Dashboard/users" element={<Users />}></Route>
             <Route path="/Dashboard/setting/:id?" element={<Setting />}></Route>
             <Route
