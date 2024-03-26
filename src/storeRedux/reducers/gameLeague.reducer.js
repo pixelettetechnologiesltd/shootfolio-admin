@@ -1,12 +1,12 @@
-import { authConstant, gameLeagueConstant } from "../constants";
+import { authConstant, gameLeagueConstant } from '../constants';
 
 const initialState = {
   gameLeague: [],
   singleGameLeague: {},
   errors: [],
   loading: false,
-  message: "",
-  sessionExpireError: "",
+  message: '',
+  sessionExpireError: '',
   page: 1,
   totalPages: 1,
 };
@@ -30,10 +30,19 @@ const gameLeagueReducer = (state = initialState, action) => {
       };
     case gameLeagueConstant.ADD_GAME_LEAGUE_SUCCESS:
     case gameLeagueConstant.UPDATE_SINGLE_GAME_LEAGUE_SUCCESS:
+      // Assuming the payload now includes { id, updates }, where `updates` is the new data for the league
+      const updatedGameLeagues = state.gameLeague.map((league) => {
+        if (league.id === action.payload.id) {
+          // Update the league with new data
+          return { ...league, ...action.payload.updates };
+        }
+        return league;
+      });
+
       return {
         ...state,
-        loading: false,
-        message: action.payload,
+        gameLeague: updatedGameLeagues,
+        message: action.payload.message,
       };
     case gameLeagueConstant.GET_SINGLE_GAME_LEAGUE_SUCCESS:
       return {
@@ -60,14 +69,14 @@ const gameLeagueReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        message: "",
+        message: '',
       };
     case authConstant.CLEAR_ERRORS:
       return {
         ...state,
         loading: false,
         errors: [],
-        sessionExpireError: "",
+        sessionExpireError: '',
       };
     default:
       return state;

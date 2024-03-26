@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import Menu from "../Components/Menu";
-import Sidebar from "../Components/Sidebar";
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
-import { images } from "../Components/Images";
-import { Link } from "react-router-dom";
-import "../Assets/Css/ViewPortfolio.css";
-import { useParams } from "react-router-dom";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import Menu from '../Components/Menu';
+import Sidebar from '../Components/Sidebar';
+import { Container, Row, Col, Button, Image } from 'react-bootstrap';
+import { images } from '../Components/Images';
+import { Link } from 'react-router-dom';
+import '../Assets/Css/ViewPortfolio.css';
+import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   GetAllPortfolio,
   GetSingleClub,
   clearErrors,
   clearMessages,
-} from "./../storeRedux/actions";
-import { Puff } from "react-loader-spinner";
+} from './../storeRedux/actions';
+import { Puff } from 'react-loader-spinner';
 const Viewportfolio = () => {
   const { id } = useParams();
-  const adminUser = JSON.parse(sessionStorage.getItem("admin"));
+  const adminUser = JSON.parse(sessionStorage.getItem('admin'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -35,15 +35,15 @@ const Viewportfolio = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-    if (sessionExpireError !== "") {
+    if (sessionExpireError !== '') {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
-      setTimeout(() => navigate("/"), 1000);
+      setTimeout(() => navigate('/'), 1000);
     }
-    if (message !== "") {
+    if (message !== '') {
       toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate("/dashboard/game/shootfolioclubs"), 2000);
+      setTimeout(() => navigate('/dashboard/game/shootfolioclubs'), 2000);
     }
   }, [error, sessionExpireError, message]);
 
@@ -63,7 +63,7 @@ const Viewportfolio = () => {
             md={3}
             lg={2}
             xl={2}
-            style={{ backgroundColor: "#1B1B1B" }}
+            style={{ backgroundColor: '#1B1B1B' }}
           >
             <Sidebar></Sidebar>
           </Col>
@@ -73,13 +73,13 @@ const Viewportfolio = () => {
             md={9}
             lg={10}
             xl={10}
-            style={{ marginTop: "30px" }}
+            style={{ marginTop: '30px' }}
           >
             <Row className="setpaddinginnerpage">
               <Col md={4}>
                 <div className="makebreadinrow">
                   <Image
-                    crossOrigin="true"
+                    // crossOrigin="ano"
                     src={singleClub?.logo && singleClub.logo}
                     width="60px"
                   />
@@ -92,7 +92,7 @@ const Viewportfolio = () => {
               <Col md={3} className="makebuttonalignend">
                 <Link to={`/Dashboard/game/addportfolioclub/${id}`}>
                   <Button className="addnewshhotfolioclubbutton">
-                    {" "}
+                    {' '}
                     + Add New Portfolio
                   </Button>
                 </Link>
@@ -137,7 +137,7 @@ const Viewportfolio = () => {
                           <Col md={2} xs={2}>
                             <div className="coinnameandlogoviewportinline">
                               <Image
-                                crossOrigin="true"
+                                // crossOrigin="Anonymous"
                                 height={20}
                                 width={20}
                                 src={
@@ -156,15 +156,15 @@ const Viewportfolio = () => {
                           </Col>
                           <Col md={2} xs={2}>
                             <p className="coinnameviewport">
-                              {" "}
-                              ${" "}
+                              {' '}
+                              ${' '}
                               {parseFloat(data.coin?.quote?.USD?.price) > 0.01
                                 ? parseFloat(
                                     data.coin?.quote?.USD?.price
                                   ).toFixed(3)
                                 : parseFloat(
                                     data.coin?.quote?.USD?.price
-                                  ).toFixed(7)}{" "}
+                                  ).toFixed(7)}{' '}
                             </p>
                           </Col>
                           <Col md={2} xs={2}>
@@ -174,8 +174,8 @@ const Viewportfolio = () => {
                           </Col>
                           <Col md={2} xs={2}>
                             <p className="coinnameviewport">
-                              {" "}
-                              ${" "}
+                              {' '}
+                              ${' '}
                               {data.quantity &&
                                 parseFloat(
                                   data.quantity * data.coin?.quote?.USD?.price
@@ -198,7 +198,7 @@ const Viewportfolio = () => {
                     );
                   })
                 ) : (
-                  ""
+                  ''
                 )}
               </Container>
             </div>

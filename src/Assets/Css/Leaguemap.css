@@ -1,55 +1,59 @@
-.makeinrowleaague{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 15px;
+.makeinrowleaague {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 15px;
 }
-.leaguecardbg{
-    background-color: #FFFFFF17;
-    padding: 30px;
-    border-radius: 10px;
-    width: 28%;
+.leaguecardbg {
+  background-color: #ffffff17;
+  padding: 30px;
+  border-radius: 10px;
+  width: 28%;
 }
-.clubname{
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #D9D9D9;
+.clubname {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #d9d9d9;
 }
-.makecatfundmeminrow{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.makecatfundmeminrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.categorytitle{
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    color: #888B96;
+.categorytitle {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: #888b96;
 }
-.categoryitself{
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    color: #D9D9D9;    
+.categoryitself {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: #d9d9d9;
 }
-.addleaguebutton, .addleaguebutton:hover{
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: center;
-    background-color: #2A7741;
-    border: none;
-    color: #D9D9D9;
-    text-decoration: none;
-    padding: 12px 45%;
+.addleaguebutton,
+.addleaguebutton:hover {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  background-color: #2a7741;
+  border: none;
+  color: #d9d9d9;
+  text-decoration: none;
+  padding: 12px 15%;
 }
-.makeaddleaguebuttonstretch{
-    display: flex;
-    justify-content: center;
+.makeaddleaguebuttonstretch {
+  display: flex;
+  justify-content: space-between;
+}
+.blurEffect {
+  filter: blur(1px);
 }

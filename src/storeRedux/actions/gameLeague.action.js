@@ -1,18 +1,18 @@
-import { authConstant, gameLeagueConstant } from "./../constants";
-import axios from "axios";
+import { authConstant, gameLeagueConstant } from './../constants';
+import axios from 'axios';
 
 export const GetAllGameLeague = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_GAME_LEAGUE_REQUEST });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       let result;
       if (page) {
         result = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues?page=${page}&limit=9`,
           {
             headers: {
-              Authorization: token ? `Bearer ${token}` : "",
+              Authorization: token ? `Bearer ${token}` : '',
             },
           }
         );
@@ -21,7 +21,7 @@ export const GetAllGameLeague = (page) => {
           `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues`,
           {
             headers: {
-              Authorization: token ? `Bearer ${token}` : "",
+              Authorization: token ? `Bearer ${token}` : '',
             },
           }
         );
@@ -40,7 +40,7 @@ export const GetAllGameLeague = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -56,12 +56,12 @@ export const GetSingleGameLeague = (leagueId) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_SINGLE_GAME_LEAGUE_REQUEST });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues/${leagueId}`,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
@@ -75,7 +75,7 @@ export const GetSingleGameLeague = (leagueId) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -90,26 +90,26 @@ export const AddGameLeague = (body) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.ADD_GAME_LEAGUE_REQUEST });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues`,
         body,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
       dispatch({
         type: gameLeagueConstant.ADD_GAME_LEAGUE_SUCCESS,
-        payload: "Game League has been created",
+        payload: 'Game League has been created',
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -125,26 +125,31 @@ export const UpdateGameLeague = (body, gameLeagueId) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.UPDATE_SINGLE_GAME_LEAGUE_REQUEST });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/gameleagues/${gameLeagueId}`,
         body,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
+      // Inside your try block, after successfully updating the league
       dispatch({
         type: gameLeagueConstant.UPDATE_SINGLE_GAME_LEAGUE_SUCCESS,
-        payload: "Game League has been updated",
+        payload: {
+          id: gameLeagueId,
+          updates: body, // or the actual response from the server if it includes the updated data
+          message: 'Game League has been updated',
+        },
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
