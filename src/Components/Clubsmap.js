@@ -3,6 +3,14 @@ import '../Assets/Css/Clubsmap.css';
 import { images } from '../Components/Images';
 import { Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  GetSingleClub,
+  GetAllGameType,
+  UpdateSingleClub,
+  clearErrors,
+  clearMessages,
+} from './../storeRedux/actions';
 const clubs = [
   {
     name: 'MI Club',
@@ -67,26 +75,43 @@ const clubs = [
 ];
 
 export const Clubsmap = ({ clubData }) => {
+  const dispatch = useDispatch();
+  const handleDisable = (e, planId, currentStatus) => {
+    e.preventDefault(); // Prevent link navigation
+    e.stopPropagation(); // Stop click event from reaching the parent link
+    let body = {
+      status: !currentStatus,
+    };
+    dispatch(UpdateSingleClub(body, planId));
+    console.log('Disable plan with id: ', planId);
+    // ... rest of your function
+  };
   return (
     <div style={{ margin: '0px 1%' }} className="maketheinrowmain">
       {clubData.map((item, ind) => (
-        <Link
-          className="clubmapremoveunderline"
-          to={`/Dashboard/game/editclub/${item.id}`}
+        <div
+          className={`clubcardbg ${!item.status ? 'blurEffect' : ''}`}
           key={ind}
         >
-          <div className="clubcardbg">
-            <p className="clubname">{item.title && item.title}</p>
-            <Image
-              // crossOrigin="Anonymous"
-              src={item.logo && item.logo}
-              width="80%"
-            />
+          <Link
+            className="clubmapremoveunderline"
+            to={`/Dashboard/game/editclub/${item.id}`}
+          >
+            <p className="clubname">{item.title}</p>
+            <Image src={item.logo} width="80%" />
+          </Link>
+          <div className="buttonContainer">
             <Link to={`/dashboard/game/viewportfolio/${item.id}`}>
               <Button className="clubaddbutton">View Portfolio</Button>
             </Link>
+            <Button
+              className="clubaddbutton disableButton"
+              onClick={(e) => handleDisable(e, item.id, item.status)}
+            >
+              {item?.status ? 'Disable' : 'Enable'}
+            </Button>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

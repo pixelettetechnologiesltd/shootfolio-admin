@@ -1,5 +1,5 @@
-import { authConstant, subscriptionPlanConstant } from "./../constants";
-import axios from "axios";
+import { authConstant, subscriptionPlanConstant } from './../constants';
+import axios from 'axios';
 
 export const AddSubscriptionPlan = (body) => {
   return async (dispatch) => {
@@ -7,26 +7,26 @@ export const AddSubscriptionPlan = (body) => {
       type: subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription`,
         body,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
       dispatch({
         type: subscriptionPlanConstant.ADD_NEW_SUBSCRIPTION_PLAN_SUCCESS,
-        payload: "Subscription plan has been created",
+        payload: 'Subscription plan has been created',
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -44,12 +44,12 @@ export const GetAllSubscriptionPlan = (page) => {
       type: subscriptionPlanConstant.GET_ALL_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription?page=${page}&limit=10`,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
@@ -67,7 +67,7 @@ export const GetAllSubscriptionPlan = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -85,26 +85,27 @@ export const UpdateSubscriptionPlan = (body, subscriptionId) => {
       type: subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
-      await axios.patch(
+      const token = sessionStorage.getItem('adminToken');
+      const response = await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription/${subscriptionId}`,
         body,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
       dispatch({
         type: subscriptionPlanConstant.EDIT_SUBSCRIPTION_PLAN_SUCCESS,
-        payload: "Subscription plan has been updated",
+        payload: response.data,
       });
     } catch (error) {
+      console.log('error===', error);
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -122,12 +123,12 @@ export const GetSingleSubscriptionPlan = (subscriptionId) => {
       type: subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/subscription/${subscriptionId}`,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
@@ -141,11 +142,49 @@ export const GetSingleSubscriptionPlan = (subscriptionId) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
           type: subscriptionPlanConstant.GET_SINGLE_SUBSCRIPTION_PLAN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const DeleteSubscription = (subscriptionId) => {
+  console.log('subscriptionId', subscriptionId);
+  return async (dispatch) => {
+    dispatch({
+      type: subscriptionPlanConstant.DELETE_SUBSCRIPTION_PLAN_REQUEST,
+    });
+    try {
+      const token = sessionStorage.getItem('adminToken');
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/v1/api/subscription/${subscriptionId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : '',
+          },
+        }
+      );
+      // dispatch(GetAllCoin(1));
+      dispatch({
+        type: subscriptionPlanConstant.DELETE_SUBSCRIPTION_PLAN_SUCCESS,
+        payload: 'Subscription has been deleted',
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: 'Session has been expired' },
+        });
+      } else {
+        dispatch({
+          type: subscriptionPlanConstant.DELETE_SUBSCRIPTION_PLAN_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }
@@ -159,12 +198,12 @@ export const GetAllTransactionHistory = (page) => {
       type: subscriptionPlanConstant.GET_ALL_CRYPTO_TRANSACTION_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/api/cryptopayment?page=${page}&limit=10`,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
@@ -182,7 +221,7 @@ export const GetAllTransactionHistory = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -200,27 +239,27 @@ export const UpdateCryptoTransStatus = (body, paymentId) => {
       type: subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/cryptopayment/${paymentId}`,
         body,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
       dispatch(GetAllTransactionHistory(1));
       dispatch({
         type: subscriptionPlanConstant.UPDATE_CRYPTO_TRANSACTION_STATUS_SUCCESS,
-        payload: "Status has been updated",
+        payload: 'Status has been updated',
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({
@@ -238,26 +277,26 @@ export const UpdateSubscriptionPlanAccordingToUser = (userId, body) => {
       type: subscriptionPlanConstant.UPDATE_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = sessionStorage.getItem("adminToken");
+      const token = sessionStorage.getItem('adminToken');
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/auth/update/subscription/${userId}`,
         body,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
       dispatch({
         type: subscriptionPlanConstant.UPDATE_SUBSCRIPTION_PLAN_SUCCESS,
-        payload: "Subscription plan has been updated",
+        payload: 'Subscription plan has been updated',
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: 'Session has been expired' },
         });
       } else {
         dispatch({

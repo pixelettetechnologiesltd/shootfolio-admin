@@ -298,8 +298,13 @@ export const UpdateSingleClub = (body, clubId) => {
       dispatch({
         type: clubConstant.UPDATE_SINGLE_CLUB_SUCCESS,
         payload: 'Club has been updated',
+        meta: {
+          clubId: clubId,
+          newStatus: body.status,
+        },
       });
     } catch (error) {
+      console.log('error', error);
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({

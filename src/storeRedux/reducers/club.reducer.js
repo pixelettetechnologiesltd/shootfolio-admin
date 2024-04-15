@@ -1,4 +1,4 @@
-import { authConstant, clubConstant } from "../constants";
+import { authConstant, clubConstant } from '../constants';
 
 const initialState = {
   club: [],
@@ -7,8 +7,8 @@ const initialState = {
   errors: [],
   loading: false,
   portLoading: false,
-  message: "",
-  sessionExpireError: "",
+  message: '',
+  sessionExpireError: '',
   page: 1,
   totalPages: 1,
 };
@@ -59,6 +59,18 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.ADD_PORTFOLIO_SUCCESS:
     case clubConstant.DELETE_COIN_SUCCESS:
     case clubConstant.UPDATE_SINGLE_CLUB_SUCCESS:
+      const updatedClubs = state.club.map((club) => {
+        if (club.id === action.meta.clubId) {
+          return { ...club, status: action.meta.newStatus };
+        }
+        return club;
+      });
+      return {
+        ...state,
+        loading: false,
+        club: updatedClubs,
+        message: action.payload,
+      };
     case clubConstant.UPDATE_SINGLE_PORTFOLIO_SUCCESS:
       return {
         ...state,
@@ -93,7 +105,7 @@ const clubReducer = (state = initialState, action) => {
         ...state,
         portLoading: false,
         loading: false,
-        message: "",
+        message: '',
       };
     case authConstant.CLEAR_ERRORS:
       return {
@@ -101,7 +113,7 @@ const clubReducer = (state = initialState, action) => {
         portLoading: false,
         loading: false,
         errors: [],
-        sessionExpireError: "",
+        sessionExpireError: '',
       };
     default:
       return state;

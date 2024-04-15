@@ -1,44 +1,54 @@
-.clubcardbg{
-    background-color: #000000;
-    padding: 20px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 1px solid white;
-    border-radius: 10px;
-    width: 200px;
-    height: 280px;
-    margin-top: 20px;
+.clubcardbg {
+  background-color: #000000;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 200px;
+  height: 280px;
+  margin-top: 20px;
 }
-.maketheinrowmain{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
-    gap: 3px;
+.maketheinrowmain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 3px;
 }
-.clubaddbutton, .clubaddbutton:hover{
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #ffffff;
-    background-color: #22492E;
-    padding: 10px 20px;
-    border: none;
-    margin-top: 20px;
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
-.clubname{
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    text-decoration: none;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #C8C8C8;
+.clubaddbutton,
+.clubaddbutton:hover {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  background-color: #22492e;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 0; /* Remove margin-top as it's no longer at the top */
+  width: 48%;
 }
-.clubmapremoveunderline{
-    text-decoration: none;
-    z-index: 0;
+.clubname {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #c8c8c8;
+}
+.clubmapremoveunderline {
+  text-decoration: none;
+  z-index: 0;
+}
+.blurEffect {
+  filter: blur(1px);
 }
