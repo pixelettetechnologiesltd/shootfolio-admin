@@ -101,15 +101,21 @@ export const Clubsmap = ({ clubData }) => {
             <Image src={item.logo} width="80%" />
           </Link>
           <div className="buttonContainer">
-            <Link to={`/dashboard/game/viewportfolio/${item.id}`}>
+            <Link to={`/dashboard/game/viewportfolio/${item.id}`} >
               <Button className="clubaddbutton">View Portfolio</Button>
             </Link>
+            
+          </div>
+          <div className="buttonContainer">
+            <Link>
             <Button
               className="clubaddbutton disableButton"
               onClick={(e) => handleDisable(e, item.id, item.status)}
             >
               {item?.status ? 'Disable' : 'Enable'}
             </Button>
+            </Link>
+            
           </div>
         </div>
       ))}

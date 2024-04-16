@@ -120,44 +120,18 @@ const Quiz = () => {
                             {data?.question && data.question}?
                           </span>
                         </div>
-                        <input
-                          type="radio"
-                          id="value-1"
-                          name="value-radio"
-                          value="value-1"
-                        />
-                        <label for="value-1">
+                        <label for="value-1" style={{ color: data.correctOption === 0 ? 'green' : 'black' }}>
                           {data?.options[0] && data.options[0]}
                         </label>
-                        <input
-                          type="radio"
-                          id="value-2"
-                          name="value-radio"
-                          value="value-2"
-                        />
-                        <label for="value-2">
+                        <label for="value-2" style={{ color: data.correctOption === 1 ? 'green' : 'black' }}>
                           {data?.options[1] && data.options[1]}
                         </label>
-                        <input
-                          type="radio"
-                          id="value-3"
-                          name="value-radio"
-                          value="value-3"
-                        />
-                        <label for="value-3">
+                        <label for="value-3" style={{ color: data.correctOption === 2 ? 'green' : 'black' }}>
                           {data?.options[2] && data.options[2]}
                         </label>
-                        <input
-                          type="radio"
-                          id="value-4"
-                          name="value-radio"
-                          value="value-4"
-                        />
-                        <label for="value-4">
+                        <label for="value-4" style={{ color: data.correctOption === 3 ? 'green' : 'black' }}>
                           {data?.options[3] && data.options[3]}
                         </label>
-                        <span class="result success">Congratulations!</span>
-                        <span class="result error">Wrong answer</span>
                       </div>
                     </Col>
                   );

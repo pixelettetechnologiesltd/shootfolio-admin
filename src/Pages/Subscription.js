@@ -110,7 +110,7 @@ const Subscription = () => {
               ) : subscriptionPlans.length > 0 ? (
                 subscriptionPlans.map((data, ind) => {
                   return (
-                    <Col md={4} key={ind}>
+                    <Col md={4} key={ind} style={{marginTop: '10px'}}>
                       <div
                         className={`plancard  ${
                           !data.status ? 'blurEffect' : ''
@@ -142,17 +142,21 @@ const Subscription = () => {
                             );
                           })}
                         <div className="cardfooter mt-5">
-                          <Link
-                            to={`/Dashboard/editsubscriptionplan/${data._id}`}
+                          <Link to={`/Dashboard/editsubscriptionplan/${data._id}`}
+                          style={{padding: '10px'}}
                           >
                             <Button className="planbutton">Edit Plan</Button>
                           </Link>
-                          <Button
-                            className="addleaguebutton disableButton"
-                            onClick={() => handleDisable(data._id, data.status)}
+                          <Link style={{padding: '10px'}}
                           >
-                            {data?.status ? 'Disable' : 'Enable'}
-                          </Button>
+                              <Button
+                              className="planbutton disableButton"
+                              onClick={() => handleDisable(data._id, data.status)}
+                            >
+                              {data?.status ? 'Disable' : 'Enable'}
+                            </Button>
+                          </Link>
+                          
                         </div>
                       </div>
                     </Col>

@@ -34,7 +34,6 @@
   padding: 10px 20px;
   border: none;
   margin-top: 0; /* Remove margin-top as it's no longer at the top */
-  width: 48%;
 }
 .clubname {
   font-size: 14px;

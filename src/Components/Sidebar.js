@@ -274,7 +274,7 @@ const Sidebar = () => {
           </NavLink>
         </Nav.Item>
 
-        <Nav.Item>
+        {/* <Nav.Item>
           <NavLink
             to="/Dashboard/setting"
             className="nav-link"
@@ -292,7 +292,7 @@ const Sidebar = () => {
             </span>
             <span className="dashboard-text">Settings</span>
           </NavLink>
-        </Nav.Item>
+        </Nav.Item> */}
         <Nav.Item>
           <NavLink className="nav-link" onClick={() => dispatch(logOut())}>
             <span className="iconsizing">
