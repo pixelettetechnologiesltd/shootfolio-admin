@@ -1,74 +1,143 @@
-import React, { useEffect, useState } from "react";
-import Menu from "../Components/Menu";
-import Sidebar from "../Components/Sidebar";
-import { BiFootball } from "react-icons/bi";
-import "../Assets/Css/Addquestion.css";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AddQuiz, clearMessages, clearErrors } from "./../storeRedux/actions";
-import { Puff } from "react-loader-spinner";
-import { useFormik } from "formik";
-import { addQuestionSchema } from "./../Schemas";
+import React, { useEffect, useState } from 'react';
+import Menu from '../Components/Menu';
+import Sidebar from '../Components/Sidebar';
+import { BiFootball } from 'react-icons/bi';
+import '../Assets/Css/Addquestion.css';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import toast from 'react-hot-toast';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  AddQuiz,
+  clearMessages,
+  clearErrors,
+  GetSingleQuizQuestion,
+  UpdateSingleQuizQuestion,
+} from './../storeRedux/actions';
+import { Puff } from 'react-loader-spinner';
+import { useFormik } from 'formik';
+import { addQuestionSchema } from './../Schemas';
 
 const Addquestion = () => {
+  const { questionId } = useParams(); // For edit mode
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [selectedOption, setSelectedOption] = useState("");
+  const [isEdit, setIsEdit] = useState(Boolean(questionId));
+  const [selectedOption, setSelectedOption] = useState('');
+  // useEffect(() => {
+  //   if (isEdit && questionId) {
+  //     console.log(
+  //       'Dispatching GetSingleQuizQuestion for questionId:',
+  //       questionId
+  //     );
+  //     setIsEdit(true);
+  //     dispatch(GetSingleQuizQuestion(questionId));
+  //   }
+  // }, [dispatch, isEdit, questionId]);
   const {
-    errors: error,
+    errors: storeErrors,
     message,
     sessionExpireError,
     loading,
+    singleQuiz,
   } = useSelector((state) => state.quizReducer);
+  console.log('singleQuiz from Redux:', singleQuiz);
+
+  // Initialize useFormik for form handling
+  const formik = useFormik({
+    initialValues: {
+      question: singleQuiz?.question || '',
+      option1: singleQuiz?.options[0] || '',
+      option2: singleQuiz?.options[1] || '',
+      option3: singleQuiz?.options[2] || '',
+      option4: singleQuiz?.options[3] || '',
+    },
+    validationSchema: addQuestionSchema,
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      const payload = {
+        question: values.question,
+        options: [
+          values.option1,
+          values.option2,
+          values.option3,
+          values.option4,
+        ],
+        correctOption: Number(selectedOption),
+      };
+      if (!selectedOption) {
+        toast.error('Correct option is required');
+        return;
+      }
+      if (isEdit) {
+        dispatch(UpdateSingleQuizQuestion(payload, questionId));
+      } else {
+        dispatch(AddQuiz(payload));
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (questionId) {
+      console.log('questionId2:', questionId);
+      // If questionId is present, we're in edit mode.
+      setIsEdit(true);
+      dispatch(GetSingleQuizQuestion(questionId));
+    }
+  }, [questionId]);
 
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
-    useFormik({
-      initialValues: {
-        question: "",
-        option1: "",
-        option2: "",
-        option3: "",
-        option4: "",
-      },
-      validationSchema: addQuestionSchema,
-      onSubmit: (values, resetForm) => {
-        const { question, option1, option2, option3, option4 } = values;
-        const result = {
-          question,
-          options: [option1, option2, option3, option4],
-          correctOption: Number(selectedOption),
-        };
-        if (!selectedOption) {
-          toast.error("Correct option is required");
-        } else {
-          dispatch(AddQuiz(result));
-          resetForm({ values: "" });
-        }
-      },
-    });
+    formik;
+
+  useEffect(() => {
+    console.log('useEffect is running');
+    console.log('questionId:', questionId);
+    console.log('singleQuiz:', singleQuiz);
+    // Only run if `singleQuiz` has new data to prevent an infinite loop.
+    if (isEdit && singleQuiz && !Object.keys(formik.values).length) {
+      console.log('Current formik values:', formik.values);
+      console.log('New values from singleQuiz:', {
+        question: singleQuiz.question,
+        option1: singleQuiz.options[0],
+        // ... rest of your options
+      });
+      if (isEdit && singleQuiz && questionId === singleQuiz._id) {
+        console.log('Setting new form values');
+        formik.setValues(
+          {
+            question: singleQuiz.question,
+            option1: singleQuiz.options[0],
+            option2: singleQuiz.options[1],
+            option3: singleQuiz.options[2],
+            option4: singleQuiz.options[3],
+          },
+          false
+        ); // Second argument `false` prevents validation from running.
+        setSelectedOption(String(singleQuiz.correctOption));
+      }
+    }
+  }, [isEdit, singleQuiz]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
   useEffect(() => {
-    if (error.length > 0) {
-      toast.error(error);
+    if (storeErrors) {
+      toast.error(storeErrors);
       dispatch(clearErrors());
     }
-    if (sessionExpireError !== "") {
+    if (sessionExpireError) {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
-      setTimeout(() => navigate("/"), 1000);
+      navigate('/login');
     }
-    if (message !== "") {
-      toast.error(message);
+    if (message) {
+      toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate(-1), 2000);
+      navigate('/quiz');
     }
-  }, [error, message, sessionExpireError]);
+  }, [storeErrors, sessionExpireError, message, dispatch, navigate]);
   return (
     <div>
       <Menu />
@@ -80,7 +149,7 @@ const Addquestion = () => {
             md={3}
             lg={2}
             xl={2}
-            style={{ backgroundColor: "#1B1B1B" }}
+            style={{ backgroundColor: '#1B1B1B' }}
           >
             <Sidebar></Sidebar>
           </Col>
@@ -90,7 +159,7 @@ const Addquestion = () => {
             md={9}
             lg={10}
             xl={10}
-            style={{ marginTop: "30px" }}
+            style={{ marginTop: '30px' }}
           >
             <Row className="setpaddinginnerpage">
               <Col md={4}>
@@ -102,8 +171,7 @@ const Addquestion = () => {
                 </div>
               </Col>
               <Col md={2}></Col>
-              <Col md={6}>
-              </Col>
+              <Col md={6}></Col>
             </Row>
             <Row className="addpaddingtomakeformcent">
               <Col md={6}>
@@ -114,11 +182,12 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      Question: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
+                      Question:{' '}
+                      <span style={{ color: 'red', marginLeft: '5px' }}>*</span>
                     </Form.Label>
                     <Col sm={10}>
                       <Form.Control
-                      style={{marginLeft:"5px"}}
+                        style={{ marginLeft: '5px' }}
                         type="text"
                         placeholder="Enter your question"
                         name="question"
@@ -131,7 +200,7 @@ const Addquestion = () => {
                           {errors.question}
                         </p>
                       ) : (
-                        ""
+                        ''
                       )}
                     </Col>
                   </Form.Group>
@@ -141,13 +210,19 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      A: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
+                      A:{' '}
+                      <span style={{ color: 'red', marginLeft: '5px' }}>*</span>
                     </Form.Label>
                     <Col sm={10} className="makebothinlinefields">
                       <Form.Group>
                         <label class="radio-button">
-                          <input value="0"  type="radio"  checked={selectedOption === "0"} onChange={handleOptionChange}/>
-                            <span class="radio"></span>
+                          <input
+                            value="0"
+                            type="radio"
+                            checked={selectedOption === '0'}
+                            onChange={handleOptionChange}
+                          />
+                          <span class="radio"></span>
                         </label>
                         {/* <input
                           type="radio"
@@ -171,7 +246,7 @@ const Addquestion = () => {
                           {errors.option1}
                         </p>
                       ) : (
-                        ""
+                        ''
                       )}
                     </Col>
                   </Form.Group>
@@ -181,15 +256,21 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      B: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
+                      B:{' '}
+                      <span style={{ color: 'red', marginLeft: '5px' }}>*</span>
                     </Form.Label>
                     <Col sm={10} className="makebothinlinefields">
-                    <Form.Group>
+                      <Form.Group>
                         <label class="radio-button">
-                          <input value="1"  type="radio"  checked={selectedOption === "1"} onChange={handleOptionChange}/>
-                            <span class="radio"></span>
+                          <input
+                            value="1"
+                            type="radio"
+                            checked={selectedOption === '1'}
+                            onChange={handleOptionChange}
+                          />
+                          <span class="radio"></span>
                         </label>
-                      {/* <input
+                        {/* <input
                         type="radio"
                         value="1"
                         checked={selectedOption === "1"}
@@ -205,13 +286,13 @@ const Addquestion = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      
+
                       {errors.option2 && touched.option2 ? (
                         <p className="form-error custom-form-error">
                           {errors.option2}
                         </p>
                       ) : (
-                        ""
+                        ''
                       )}
                     </Col>
                   </Form.Group>
@@ -221,13 +302,19 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      C: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
+                      C:{' '}
+                      <span style={{ color: 'red', marginLeft: '5px' }}>*</span>
                     </Form.Label>
                     <Col sm={10} className="makebothinlinefields">
                       <Form.Group>
-                      <label class="radio-button">
-                          <input value="2"  type="radio"  checked={selectedOption === "2"} onChange={handleOptionChange}/>
-                            <span class="radio"></span>
+                        <label class="radio-button">
+                          <input
+                            value="2"
+                            type="radio"
+                            checked={selectedOption === '2'}
+                            onChange={handleOptionChange}
+                          />
+                          <span class="radio"></span>
                         </label>
                       </Form.Group>
                       <Form.Control
@@ -250,7 +337,7 @@ const Addquestion = () => {
                           {errors.option3}
                         </p>
                       ) : (
-                        ""
+                        ''
                       )}
                     </Col>
                   </Form.Group>
@@ -260,13 +347,19 @@ const Addquestion = () => {
                     controlId="formHorizontalEmail"
                   >
                     <Form.Label column sm={2} className="formlabelquestion">
-                      D: <span style={{ color: "red", marginLeft:"5px" }}>*</span>
+                      D:{' '}
+                      <span style={{ color: 'red', marginLeft: '5px' }}>*</span>
                     </Form.Label>
                     <Col sm={10} className="makebothinlinefields">
                       <Form.Group>
-                      <label class="radio-button">
-                          <input value="3"  type="radio"  checked={selectedOption === "3"} onChange={handleOptionChange}/>
-                            <span class="radio"></span>
+                        <label class="radio-button">
+                          <input
+                            value="3"
+                            type="radio"
+                            checked={selectedOption === '3'}
+                            onChange={handleOptionChange}
+                          />
+                          <span class="radio"></span>
                         </label>
                       </Form.Group>
                       <Form.Control
@@ -289,7 +382,7 @@ const Addquestion = () => {
                           {errors.option4}
                         </p>
                       ) : (
-                        ""
+                        ''
                       )}
                     </Col>
                   </Form.Group>
@@ -310,7 +403,7 @@ const Addquestion = () => {
                           wrapperClass
                         />
                       ) : (
-                        "Save"
+                        'Save'
                       )}
                     </Button>
                   </div>

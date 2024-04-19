@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Menu from "../Components/Menu";
-import Sidebar from "../Components/Sidebar";
-import { BiFootball } from "react-icons/bi";
-import "../Assets/Css/Addquestion.css";
-import { Link } from "react-router-dom";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { GetAllQuiz, clearErrors } from "./../storeRedux/actions";
-import { Puff } from "react-loader-spinner";
-import Pagination from "@mui/material/Pagination";
-import { makeStyles } from "@mui/styles";
+import React, { useEffect, useState } from 'react';
+import Menu from '../Components/Menu';
+import Sidebar from '../Components/Sidebar';
+import { BiFootball } from 'react-icons/bi';
+import '../Assets/Css/Addquestion.css';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  GetAllQuiz,
+  clearErrors,
+  DeleteSingleQuizQuestion,
+} from './../storeRedux/actions';
+import { Puff } from 'react-loader-spinner';
+import Pagination from '@mui/material/Pagination';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   root: {
-    "& .MuiPaginationItem-root": {
-      color: "white",
-      backgroundColor: "black",
-      "&:hover": {
-        backgroundColor: "black",
-        color: "white",
+    '& .MuiPaginationItem-root': {
+      color: 'white',
+      backgroundColor: 'black',
+      '&:hover': {
+        backgroundColor: 'black',
+        color: 'white',
       },
-      "& .Mui-selected": {
-        backgroundColor: "black",
-        color: "white",
+      '& .Mui-selected': {
+        backgroundColor: 'black',
+        color: 'white',
       },
     },
   },
@@ -48,15 +52,22 @@ const Quiz = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-    if (sessionExpireError !== "") {
+    if (sessionExpireError !== '') {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
-      setTimeout(() => navigate("/"), 1000);
+      setTimeout(() => navigate('/'), 1000);
     }
   }, [error, sessionExpireError]);
   useEffect(() => {
     dispatch(GetAllQuiz(page));
   }, [page]);
+
+  const handleDelete = (questionId) => {
+    // Navigate to the edit form with the questionId
+    // navigate(`/quiz/edit/${questionId}`);
+    dispatch(DeleteSingleQuizQuestion(questionId));
+    dispatch(GetAllQuiz(page));
+  };
   return (
     <div>
       <Menu />
@@ -68,7 +79,7 @@ const Quiz = () => {
             md={3}
             lg={2}
             xl={2}
-            style={{ backgroundColor: "#1B1B1B" }}
+            style={{ backgroundColor: '#1B1B1B' }}
           >
             <Sidebar></Sidebar>
           </Col>
@@ -78,7 +89,7 @@ const Quiz = () => {
             md={9}
             lg={10}
             xl={10}
-            style={{ marginTop: "30px", marginBottom:"30px" }}
+            style={{ marginTop: '30px', marginBottom: '30px' }}
           >
             <Row className="setpaddinginnerpage">
               <Col md={4}>
@@ -93,7 +104,7 @@ const Quiz = () => {
               <Col md={3} className="makebuttonalignend">
                 <Link to="/addquestion">
                   <Button className="addnewshhotfolioclubbutton">
-                    {" "}
+                    {' '}
                     + Add Question
                   </Button>
                 </Link>
@@ -120,18 +131,53 @@ const Quiz = () => {
                             {data?.question && data.question}?
                           </span>
                         </div>
-                        <label for="value-1" style={{ color: data.correctOption === 0 ? 'green' : 'black' }}>
+                        <label
+                          for="value-1"
+                          style={{
+                            color: data.correctOption === 0 ? 'green' : 'black',
+                          }}
+                        >
                           {data?.options[0] && data.options[0]}
                         </label>
-                        <label for="value-2" style={{ color: data.correctOption === 1 ? 'green' : 'black' }}>
+                        <label
+                          for="value-2"
+                          style={{
+                            color: data.correctOption === 1 ? 'green' : 'black',
+                          }}
+                        >
                           {data?.options[1] && data.options[1]}
                         </label>
-                        <label for="value-3" style={{ color: data.correctOption === 2 ? 'green' : 'black' }}>
+                        <label
+                          for="value-3"
+                          style={{
+                            color: data.correctOption === 2 ? 'green' : 'black',
+                          }}
+                        >
                           {data?.options[2] && data.options[2]}
                         </label>
-                        <label for="value-4" style={{ color: data.correctOption === 3 ? 'green' : 'black' }}>
+                        <label
+                          for="value-4"
+                          style={{
+                            color: data.correctOption === 3 ? 'green' : 'black',
+                          }}
+                        >
                           {data?.options[3] && data.options[3]}
                         </label>
+                        <div className="quiz-actions">
+                          <Link
+                            to={`/quiz/edit/${data.id}`}
+                            className="quiz-edit-btn"
+                          >
+                            <Button>Edit</Button>
+                          </Link>
+                          <Button
+                            className="quiz-delete-btn"
+                            variant="danger"
+                            onClick={() => handleDelete(data.id)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
                       </div>
                     </Col>
                   );
@@ -141,25 +187,25 @@ const Quiz = () => {
               )}
             </Row>
             {loading
-          ? ""
-          : quiz.length > 0 && (
-              <Pagination
-                classes={{ root: classes.root }}
-                variant="outlined"
-                count={totalPages}
-                page={page}
-                size="large"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "2rem",
-                }}
-                showFirstButton
-                showLastButton
-                onChange={(e, value) => setPage(value)}
-              />
-            )}
+              ? ''
+              : quiz.length > 0 && (
+                  <Pagination
+                    classes={{ root: classes.root }}
+                    variant="outlined"
+                    count={totalPages}
+                    page={page}
+                    size="large"
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: '2rem',
+                    }}
+                    showFirstButton
+                    showLastButton
+                    onChange={(e, value) => setPage(value)}
+                  />
+                )}
           </Col>
         </Row>
       </Container>
