@@ -167,12 +167,16 @@ const Quiz = () => {
                           <Link
                             to={`/quiz/edit/${data.id}`}
                             className="quiz-edit-btn"
+                            style={{ marginRight: '10px' }}
                           >
-                            <Button>Edit</Button>
+                            <Button className="addnewshhotfolioclubbutton">
+                              Edit
+                            </Button>
                           </Link>
                           <Button
                             className="quiz-delete-btn"
                             variant="danger"
+                            style={{ padding: '10px 20px' }}
                             onClick={() => handleDelete(data.id)}
                           >
                             Delete

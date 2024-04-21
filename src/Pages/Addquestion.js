@@ -34,6 +34,17 @@ const Addquestion = () => {
   //     dispatch(GetSingleQuizQuestion(questionId));
   //   }
   // }, [dispatch, isEdit, questionId]);
+  useEffect(() => {
+    console.log('useEffect 1');
+
+    if (questionId) {
+      console.log('questionId2:', questionId);
+      // If questionId is present, we're in edit mode.
+      setIsEdit(true);
+      dispatch(GetSingleQuizQuestion(questionId));
+      console.log('singleQuiz from Redux:', singleQuiz);
+    }
+  }, [questionId]);
   const {
     errors: storeErrors,
     message,
@@ -41,7 +52,6 @@ const Addquestion = () => {
     loading,
     singleQuiz,
   } = useSelector((state) => state.quizReducer);
-  console.log('singleQuiz from Redux:', singleQuiz);
 
   // Initialize useFormik for form handling
   const formik = useFormik({
@@ -77,20 +87,20 @@ const Addquestion = () => {
     },
   });
 
-  useEffect(() => {
-    if (questionId) {
-      console.log('questionId2:', questionId);
-      // If questionId is present, we're in edit mode.
-      setIsEdit(true);
-      dispatch(GetSingleQuizQuestion(questionId));
-    }
-  }, [questionId]);
+  // useEffect(() => {
+  //   if (questionId) {
+  //     console.log('questionId2:', questionId);
+  //     // If questionId is present, we're in edit mode.
+  //     setIsEdit(true);
+  //     dispatch(GetSingleQuizQuestion(questionId));
+  //   }
+  // }, [questionId]);
 
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     formik;
 
   useEffect(() => {
-    console.log('useEffect is running');
+    console.log('useEffect 2 is running');
     console.log('questionId:', questionId);
     console.log('singleQuiz:', singleQuiz);
     // Only run if `singleQuiz` has new data to prevent an infinite loop.
@@ -123,21 +133,25 @@ const Addquestion = () => {
   };
 
   useEffect(() => {
+    console.log('useEffect 3', message, sessionExpireError);
     if (storeErrors) {
+      console.log('useEffect 4', storeErrors);
       toast.error(storeErrors);
       dispatch(clearErrors());
     }
     if (sessionExpireError) {
+      console.log('useEffect 5');
       toast.error(sessionExpireError);
       dispatch(clearErrors());
       navigate('/login');
     }
     if (message) {
+      console.log('useEffect 6');
       toast.success(message);
       dispatch(clearMessages());
       navigate('/quiz');
     }
-  }, [storeErrors, sessionExpireError, message, dispatch, navigate]);
+  }, []);
   return (
     <div>
       <Menu />
