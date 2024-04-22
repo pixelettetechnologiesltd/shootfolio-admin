@@ -52,7 +52,6 @@ const Addquestion = () => {
       console.log('singleQuiz from Redux:', singleQuiz);
     }
   }, [questionId]);
-  
 
   // Initialize useFormik for form handling
   const formik = useFormik({
@@ -138,15 +137,15 @@ const Addquestion = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-    if (sessionExpireError !== "") {
+    if (sessionExpireError !== '') {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
-      setTimeout(() => navigate("/"), 1000);
+      setTimeout(() => navigate('/'), 1000);
     }
-    if (message !== "") {
+    if (message !== '') {
       toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate("/quiz"), 2000);
+      setTimeout(() => navigate('/quiz'), 2000);
     }
   }, [error, sessionExpireError, message]);
 

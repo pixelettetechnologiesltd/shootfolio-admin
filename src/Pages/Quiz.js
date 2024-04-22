@@ -12,6 +12,7 @@ import {
   GetAllQuiz,
   clearErrors,
   DeleteSingleQuizQuestion,
+  clearMessages,
 } from './../storeRedux/actions';
 import { Puff } from 'react-loader-spinner';
 import Pagination from '@mui/material/Pagination';
@@ -45,6 +46,7 @@ const Quiz = () => {
     errors: error,
     sessionExpireError,
     loading,
+    message,
   } = useSelector((state) => state.quizReducer);
 
   useEffect(() => {
@@ -57,7 +59,12 @@ const Quiz = () => {
       dispatch(clearErrors());
       setTimeout(() => navigate('/'), 1000);
     }
-  }, [error, sessionExpireError]);
+    if (message !== '') {
+      toast.success(message);
+      dispatch(clearMessages());
+      //  setTimeout(() => navigate('/quiz'), 2000);
+    }
+  }, [error, sessionExpireError, message]);
   useEffect(() => {
     dispatch(GetAllQuiz(page));
   }, [page]);
