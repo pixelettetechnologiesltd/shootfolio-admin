@@ -1,6 +1,9 @@
 {
   "name": "shootfollio",
   "version": "0.1.0",
+  "engines": {
+    "node": "18.18.0"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -46,6 +49,9 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "overrides": {
+    "react": "17.0.2"
   },
   "browserslist": {
     "production": [
