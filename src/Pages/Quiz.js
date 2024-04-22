@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar';
 import { BiFootball } from 'react-icons/bi';
 import '../Assets/Css/Addquestion.css';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import {
   clearErrors,
   DeleteSingleQuizQuestion,
   clearMessages,
+  GetSingleQuizQuestion,
 } from './../storeRedux/actions';
 import { Puff } from 'react-loader-spinner';
 import Pagination from '@mui/material/Pagination';
@@ -67,6 +68,7 @@ const Quiz = () => {
   }, [error, sessionExpireError, message]);
   useEffect(() => {
     dispatch(GetAllQuiz(page));
+    dispatch(GetSingleQuizQuestion(page));
   }, [page]);
 
   const handleDelete = (questionId) => {
