@@ -19,6 +19,13 @@ import { useFormik } from 'formik';
 import { addQuestionSchema } from './../Schemas';
 
 const Addquestion = () => {
+  const {
+    errors: error,
+    message,
+    sessionExpireError,
+    loading,
+    singleQuiz,
+  } = useSelector((state) => state.quizReducer);
   const { questionId } = useParams(); // For edit mode
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,13 +52,7 @@ const Addquestion = () => {
       console.log('singleQuiz from Redux:', singleQuiz);
     }
   }, [questionId]);
-  const {
-    errors: storeErrors,
-    message,
-    sessionExpireError,
-    loading,
-    singleQuiz,
-  } = useSelector((state) => state.quizReducer);
+  
 
   // Initialize useFormik for form handling
   const formik = useFormik({
@@ -133,25 +134,22 @@ const Addquestion = () => {
   };
 
   useEffect(() => {
-    console.log('useEffect 3', message, sessionExpireError);
-    if (storeErrors) {
-      console.log('useEffect 4', storeErrors);
-      toast.error(storeErrors);
+    if (error.length > 0) {
+      toast.error(error);
       dispatch(clearErrors());
     }
-    if (sessionExpireError) {
-      console.log('useEffect 5');
+    if (sessionExpireError !== "") {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
-      navigate('/login');
+      setTimeout(() => navigate("/"), 1000);
     }
-    if (message) {
-      console.log('useEffect 6');
+    if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
-      navigate('/quiz');
+      setTimeout(() => navigate("/quiz"), 2000);
     }
-  }, []);
+  }, [error, sessionExpireError, message]);
+
   return (
     <div>
       <Menu />
