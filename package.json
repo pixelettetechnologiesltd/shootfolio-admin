@@ -1,15 +1,11 @@
 {
   "name": "shootfollio",
   "version": "0.1.0",
-  "engines": {
-    "node": "18.18.0"
-  },
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.0",
-    "@mui/styles": "^5.14.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.15",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,11 +16,11 @@
     "dotenv": "^16.1.4",
     "formik": "^2.4.2",
     "multiselect-react-dropdown": "^2.0.25",
-    "react": "^18.2.0",
+    "react": "^17.0.0 || ^18.0.0",
     "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.7.4",
     "react-circular-progressbar": "^2.1.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
     "react-loader-spinner": "^5.3.4",
@@ -44,14 +40,15 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
-  },
-  "overrides": {
-    "react": "17.0.2"
   },
   "browserslist": {
     "production": [

@@ -15,29 +15,12 @@ import {
 } from "./../storeRedux/actions";
 import { Puff } from "react-loader-spinner";
 import Pagination from "@mui/material/Pagination";
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  root: {
-    "& .MuiPaginationItem-root": {
-      color: "white",
-      backgroundColor: "black",
-      "&:hover": {
-        backgroundColor: "black",
-        color: "white",
-      },
-      "& .Mui-selected": {
-        backgroundColor: "black",
-        color: "white",
-      },
-    },
-  },
-});
 
 const Addnewleague = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const classes = useStyles();
+  
   const [page, setPage] = useState(1);
   const {
     gameLeague,
@@ -131,8 +114,9 @@ const Addnewleague = () => {
                 ? ""
                 : gameLeague.length > 0 && (
                     <Pagination
-                      classes={{ root: classes.root }}
+                      
                       variant="outlined"
+                      color="secondary"
                       count={totalPages}
                       page={page}
                       size="large"
