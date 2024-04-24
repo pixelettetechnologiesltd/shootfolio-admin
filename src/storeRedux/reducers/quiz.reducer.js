@@ -55,10 +55,8 @@ const quizReducer = (state = initialState, action) => {
     case quizConstant.UPDATE_SINGLE_QUIZ_QUESTION_SUCCESS:
       return {
         ...state,
-        quiz: state.quiz.map((q) =>
-          q._id === action.payload._id ? action.payload : q
-        ),
         loading: false,
+        message: action.payload,
       };
     case quizConstant.UPDATE_SINGLE_QUIZ_QUESTION_FAILURE:
       return {
@@ -67,7 +65,6 @@ const quizReducer = (state = initialState, action) => {
         loading: false,
       };
     case quizConstant.GET_SINGLE_QUIZ_QUESTION_SUCCESS:
-      console.log('Setting singleQuiz with payload:', action.payload);
       return {
         ...state,
         singleQuiz: action.payload,
@@ -78,6 +75,7 @@ const quizReducer = (state = initialState, action) => {
         ...state,
         error: action.error,
         loading: false,
+        singleQuiz: {},
       };
     case quizConstant.DELETE_SINGLE_QUIZ_QUESTION_FAILURE:
       return {

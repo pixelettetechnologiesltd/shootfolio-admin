@@ -30,37 +30,45 @@ const Addquestion = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(Boolean(questionId));
-  const [selectedOption, setSelectedOption] = useState('');
-  // useEffect(() => {
-  //   if (isEdit && questionId) {
-  //     console.log(
-  //       'Dispatching GetSingleQuizQuestion for questionId:',
-  //       questionId
-  //     );
-  //     setIsEdit(true);
-  //     dispatch(GetSingleQuizQuestion(questionId));
-  //   }
-  // }, [dispatch, isEdit, questionId]);
+  const [selectedOption, setSelectedOption] = useState(
+    singleQuiz?.correctOption?.toString() || ''
+  );
   useEffect(() => {
-    console.log('useEffect 1');
-
     if (questionId) {
-      console.log('questionId2:', questionId);
       // If questionId is present, we're in edit mode.
       setIsEdit(true);
       dispatch(GetSingleQuizQuestion(questionId));
-      console.log('singleQuiz from Redux:', singleQuiz);
     }
   }, [questionId]);
 
   // Initialize useFormik for form handling
   const formik = useFormik({
     initialValues: {
-      question: singleQuiz?.question || '',
-      option1: singleQuiz?.options[0] || '',
-      option2: singleQuiz?.options[1] || '',
-      option3: singleQuiz?.options[2] || '',
-      option4: singleQuiz?.options[3] || '',
+      question: singleQuiz
+        ? singleQuiz.question
+          ? singleQuiz.question
+          : ''
+        : '',
+      option1: singleQuiz
+        ? singleQuiz.options
+          ? singleQuiz.options[0]
+          : ''
+        : '',
+      option2: singleQuiz
+        ? singleQuiz.options
+          ? singleQuiz.options[1]
+          : ''
+        : '',
+      option3: singleQuiz
+        ? singleQuiz.options
+          ? singleQuiz.options[2]
+          : ''
+        : '',
+      option4: singleQuiz
+        ? singleQuiz.options
+          ? singleQuiz.options[3]
+          : ''
+        : '',
     },
     validationSchema: addQuestionSchema,
     enableReinitialize: true,
@@ -87,32 +95,12 @@ const Addquestion = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (questionId) {
-  //     console.log('questionId2:', questionId);
-  //     // If questionId is present, we're in edit mode.
-  //     setIsEdit(true);
-  //     dispatch(GetSingleQuizQuestion(questionId));
-  //   }
-  // }, [questionId]);
-
   const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
     formik;
 
   useEffect(() => {
-    console.log('useEffect 2 is running');
-    console.log('questionId:', questionId);
-    console.log('singleQuiz:', singleQuiz);
-    // Only run if `singleQuiz` has new data to prevent an infinite loop.
     if (isEdit && singleQuiz && !Object.keys(formik.values).length) {
-      console.log('Current formik values:', formik.values);
-      console.log('New values from singleQuiz:', {
-        question: singleQuiz.question,
-        option1: singleQuiz.options[0],
-        // ... rest of your options
-      });
       if (isEdit && singleQuiz && questionId === singleQuiz._id) {
-        console.log('Setting new form values');
         formik.setValues(
           {
             question: singleQuiz.question,
@@ -122,11 +110,11 @@ const Addquestion = () => {
             option4: singleQuiz.options[3],
           },
           false
-        ); // Second argument `false` prevents validation from running.
+        );
         setSelectedOption(String(singleQuiz.correctOption));
       }
     }
-  }, [isEdit, singleQuiz]);
+  }, [isEdit, singleQuiz, selectedOption]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -178,7 +166,9 @@ const Addquestion = () => {
                   <span className="breadgreenfootball">
                     <BiFootball />
                   </span>
-                  <p className="sootfoliobreadclub">Add Quiz Question</p>
+                  <p className="sootfoliobreadclub">
+                    {singleQuiz?.question ? 'Edit' : 'Add'} Quiz Question
+                  </p>
                 </div>
               </Col>
               <Col md={2}></Col>

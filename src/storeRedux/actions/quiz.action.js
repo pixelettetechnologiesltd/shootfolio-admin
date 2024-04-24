@@ -72,7 +72,6 @@ export const AddQuiz = (body) => {
 };
 
 export const GetSingleQuizQuestion = (id) => {
-  console.log('id===', id);
   return async (dispatch) => {
     dispatch({ type: quizConstant.GET_SINGLE_QUIZ_QUESTION_REQUEST });
     try {
@@ -86,7 +85,6 @@ export const GetSingleQuizQuestion = (id) => {
         }
       );
       const { data } = result;
-      console.log('data===', data);
       dispatch({
         type: quizConstant.GET_SINGLE_QUIZ_QUESTION_SUCCESS,
         payload: data,
@@ -115,19 +113,18 @@ export const UpdateSingleQuizQuestion = (body, quizId) => {
       const token = sessionStorage.getItem('adminToken');
       await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/v1/api/quiz/${quizId}`,
+        body,
+
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
+
       dispatch({
         type: quizConstant.UPDATE_SINGLE_QUIZ_QUESTION_SUCCESS,
-        payload: {
-          id: quizId,
-          updates: body, // or the actual response from the server if it includes the updated data
-          message: 'Quiz has been updated',
-        },
+        payload: 'Quiz has been updated',
       });
     } catch (error) {
       if (error.response.data.code === 401) {
@@ -147,7 +144,6 @@ export const UpdateSingleQuizQuestion = (body, quizId) => {
 };
 
 export const DeleteSingleQuizQuestion = (id) => {
-  console.log('id===', id);
   return async (dispatch) => {
     dispatch({ type: quizConstant.DELETE_SINGLE_QUIZ_QUESTION_REQUEST });
     try {
